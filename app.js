@@ -41,6 +41,11 @@ var Suburb = mongoose.model("Suburb", suburbSchema);
 app.get('/',(req,res) => {
 	res.render("index");
 });
+
+// data visualizaiton route
+app.get('/homelessdv',(req,res) => {
+	res.render("dv");
+});
 // app.get('/homelessness', (req,res) => {
 // 	//Get all homelessness from db
 // 	Blog.find({}, (err, homelessness) => {
