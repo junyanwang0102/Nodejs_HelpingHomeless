@@ -2,7 +2,6 @@ var express = require('express');
 var app = express();
 var bodyParser = require("body-parser");
 var mongoose = require("mongoose");
-var PORT = process.env.PORT || 3000;
 
 // set mongoose, localhost/DB's name
 
@@ -82,6 +81,6 @@ app.get('/',(req,res) => {
 // });
 
 
-app.listen(PORT, () => {
+app.listen(process.env.PORT || 3000, () => {
 	console.log("Supportive Server has started!");
 });
