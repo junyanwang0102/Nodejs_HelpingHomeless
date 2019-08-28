@@ -3870,17 +3870,17 @@ EFFECT   EFFECT   EFFECT   EFFECT   EFFECT   EFFECT  EFFECT
 -----------------------------------------------------------
 */
 .bg1-pattern {
-	background-image: url(../img/pattern1.png);
+	background-image: url(/stylesheets/img/pattern1.png);
 	background-repeat: repeat;
 }
 
 .bg2-pattern {
-	background-image: url(../images/icons/pattern2.png);
+	background-image: url(/stylesheets/img/pattern1.png);
 	background-repeat: repeat;
 }
 
 .bg3-pattern {
-	background-image: url(../images/icons/pattern3.png);
+	background-image: url(/stylesheets/img/pattern1.png);
 	background-repeat: repeat;
 }
 
