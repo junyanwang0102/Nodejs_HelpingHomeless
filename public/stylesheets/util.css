@@ -3130,6 +3130,16 @@ TEXT TEXT TEXT TEXT TEXT TEXT TEXT TEXT TEXT TEXT TEXT TEXT
 	word-spacing: 6px;
 }
 
+.tit41 {
+	font-family: Montserrat;
+	font-weight: 700;
+	font-size: 50px;
+	line-height: 1.2;
+	color: white;
+	
+	
+}
+
 .tit5 {
 	font-family: Poppins;
 	font-weight: 700;
