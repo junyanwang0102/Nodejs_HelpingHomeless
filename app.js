@@ -1,9 +1,18 @@
+require('dotenv').config();
 var express = require('express');
 var app = express();
 var bodyParser = require("body-parser");
 var mongoose = require("mongoose");
+var NodeGeocoder = require('node-geocoder');
 
-// set mongoose, localhost/DB's name
+var options = {
+  provider: 'google',
+  httpAdapter: 'https',
+  apiKey: process.env.GEOCODER_API_KEY,
+  formatter: null
+};
+ 
+var geocoder = NodeGeocoder(options);
 
 // local DB
 // mongoose.connect("mongodb://localhost/iedb", {useNewUrlParser: true});
@@ -22,22 +31,57 @@ app.use(express.static("public"));
 app.use(bodyParser.urlencoded({extended: true}));
 
 // set iedb's Schema
-var councilSchema = new mongoose.Schema({
-	council: String,
-	number_of_homeless: Number
+var volunteerSchema = new mongoose.Schema({
+	name: String,
+	postcode: Number,
+	charity_size: String,
+	main_activity: String,
+	main_beneficiaries: String,
+	Children: String,
+	Adult: String,
+	Old: String,
+	Family: String,
+	num_volunteers: Number,
+	net_income: Number,
+	address: String,
+	latitude: Number,
+	longitude: Number
 });
-var suburbSchema = new mongoose.Schema({
-	council: String,
-	suburb: String,
-	All_homeless_persons: Number
+
+var uservolunteerSchema = new mongoose.Schema({
+	description: String,
+	location: String,
+	lat: Number,
+	lng: Number
 });
 
-// using mongoose to create two model: Council && Suburb
-var Council = mongoose.model("Council", councilSchema);
-var Suburb = mongoose.model("Suburb", suburbSchema);
+var volNgoSchema = new mongoose.Schema({
+	name: String,
+	main_beneficiaries: String,
+	children: String,
+	adult: String,
+	old: String,
+	family: String,
+	num_volunteers: Number,
+	address: String,
+	latitude: Number,
+	longitude: Number,
+	suburb: String
+});
+
+var Volunteer = mongoose.model("Volunteer", volunteerSchema);
+var UserVolunteer = mongoose.model("UserVolunteer", uservolunteerSchema);
+var VolNgo = mongoose.model("VolNgo", volNgoSchema);
+
+// insert data to mongoDB
+// VolNgo.create();
 
 
-// RESTful ROUTE STARTS HERE
+// mongoDB 排序组合！！！！
+var mySort = {_id:-1};
+
+// **************Start Restful Routing
+// Home page
 app.get('/',(req,res) => {
 	res.render("index");
 });
@@ -46,6 +90,59 @@ app.get('/',(req,res) => {
 app.get('/homelessdv',(req,res) => {
 	res.render("dv");
 });
+
+// ************************** VOLUNTEER SECTION *******************************************
+// volunteer 的 home page
+// 在find里面加mongo语法，例如：name:"Desert Mesa". 从而从数据库中获取用户输入的suburb的NGO信息，然后把这些信息通过		  	 suburbNgos变量传递给volunteer.ejs文件
+
+app.get('/volunteers', (req,res) => {
+	UserVolunteer.find({}, (err, allNgos) => {
+		if (err) {
+			console.log(err);
+		} else {
+			res.render("volunteer", {suburbNgos: allNgos});
+			UserVolunteer.deleteMany({}, function(err) {
+				if (err) {
+					console.log(err);
+				}
+			});
+		}
+	})
+		// .sort(mySort).limit(1);
+});
+
+// 第一步，用户在volunteer page 填写完subrub和type的时候，处理表单的信息
+app.post("/volunteers", function(req, res){
+  var description = req.body.description;
+  geocoder.geocode(req.body.location, function(err, data) {
+    if (err || !data.length) {
+      //req.flash('error', 'Invalid address');
+      return res.redirect('back');
+    }
+    var lat = data[0].latitude;
+    var lng = data[0].longitude;
+    var location = data[0].formattedAddress;  // Carnegie VIC 3163, Australia
+    var newUserVolunteer = {description: description, location: location, lat: lat, lng: lng};
+
+	  
+	// 接收表单信息后创建一个新对象并且存到数据库里
+    UserVolunteer.create(newUserVolunteer, function(err, newlyCreated){
+        if(err){
+            console.log(err);
+        } else {
+			//res.render("volunteer");
+            res.redirect("/volunteers#map");
+        }
+    });
+	  
+  });
+});
+// ************************** VOLUNTEER SECTION END *******************************************
+
+
+
+
+
 // app.get('/homelessness', (req,res) => {
 // 	//Get all homelessness from db
 // 	Blog.find({}, (err, homelessness) => {
