@@ -14,10 +14,7 @@ var options = {
  
 var geocoder = NodeGeocoder(options);
 
-// local DB
-// mongoose.connect("mongodb://localhost/iedb", {useNewUrlParser: true});
-
-// cloud DB
+// cloud DB: MongoDB Atalas
 mongoose.connect('mongodb+srv://andrew:wjyQQ1995227@cluster0-t4pli.mongodb.net/iedb?retryWrites=true&w=majority', {
 	useNewUrlParser: true
 }).then(() => {
@@ -54,9 +51,6 @@ var volNgoSchema = new mongoose.Schema({
 var UserVolunteer = mongoose.model("UserVolunteer", uservolunteerSchema);
 var VolNgo = mongoose.model("VolNgo", volNgoSchema);
 
-// mongoDB 排序组合！
-// var mySort = {_id:-1};
-
 // ************** Start Restful Routing ****************
 // Home Page
 app.get('/',(req,res) => {
@@ -68,10 +62,8 @@ app.get('/homelessdv',(req,res) => {
 	res.render("dv");
 });
 
-// ************************** VOLUNTEER Page *******************************************
-// volunteer 的 home page
+// volunteer page
 app.get('/volunteers', (req,res) => {
-	//如果location 存在，那么find 所有和这个suburb匹配的NGO数据
 	var location = req.query.location;
 	var description = req.query.description;
 	if (typeof location !== "undefined") {
@@ -126,16 +118,10 @@ app.get('/volunteers', (req,res) => {
 				console.log(err);
 			} else {
 				res.render("volunteer", {volNGO: volNGOs});
-				// UserVolunteer.deleteMany({}, function(err) {
-				// 	if (err) {
-				// 		console.log(err);
-				// 	}
-				// });
 			}
 		});
 	}
 });
-// ************************** VOLUNTEER SECTION END *******************************************
 
 
 
@@ -145,7 +131,15 @@ app.get('/volunteers', (req,res) => {
 
 
 
-// set iedb's Schema
+
+
+
+// mongoDB 排序组合！
+// var mySort = {_id:-1};
+
+// local DB
+// mongoose.connect("mongodb://localhost/iedb", {useNewUrlParser: true});
+
 // var volunteerSchema = new mongoose.Schema({
 // 	name: String,
 // 	postcode: Number,
