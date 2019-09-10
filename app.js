@@ -54,9 +54,6 @@ var volNgoSchema = new mongoose.Schema({
 var UserVolunteer = mongoose.model("UserVolunteer", uservolunteerSchema);
 var VolNgo = mongoose.model("VolNgo", volNgoSchema);
 
-// insert data to mongoDB
-// VolNgo.create();
-
 // mongoDB 排序组合！
 // var mySort = {_id:-1};
 
