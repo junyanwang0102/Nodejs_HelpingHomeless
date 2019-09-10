@@ -241,13 +241,13 @@
 							<div class="card">
 								<div class="card-header" id="headingOne">
 									<h5 class="mb-0">
-										<button class="btn btn-link collapsed" data-toggle="collapse" data-target="#one213" aria-expanded="false" aria-controls="one213">
+										<button class="btn btn-link collapsed" data-toggle="collapse" data-target="#collapse<%= ngo._id %>" aria-expanded="false" aria-controls="collapse<%= ngo._id %>">
 											<%= ngo.name %>
 										</button>
 									</h5>
 								</div>
 
-								<div id="one213" class="collapse show" aria-labelledby="headingOne" data-parent="#accordion">
+								<div id="collapse<%= ngo._id %>" class="collapse show" aria-labelledby="headingOne" data-parent="#accordion">
 									<div class="card-body">
 										<ul class="text-left">
 											<li><strong>Address: </strong><%= ngo.address %></li>
