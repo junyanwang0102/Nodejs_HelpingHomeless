@@ -30,24 +30,6 @@ app.set("view engine", "ejs");
 app.use(express.static("public"));
 app.use(bodyParser.urlencoded({extended: true}));
 
-// set iedb's Schema
-var volunteerSchema = new mongoose.Schema({
-	name: String,
-	postcode: Number,
-	charity_size: String,
-	main_activity: String,
-	main_beneficiaries: String,
-	Children: String,
-	Adult: String,
-	Old: String,
-	Family: String,
-	num_volunteers: Number,
-	net_income: Number,
-	address: String,
-	latitude: Number,
-	longitude: Number
-});
-
 var uservolunteerSchema = new mongoose.Schema({
 	description: String,
 	location: String,
@@ -69,79 +51,147 @@ var volNgoSchema = new mongoose.Schema({
 	suburb: String
 });
 
-var Volunteer = mongoose.model("Volunteer", volunteerSchema);
 var UserVolunteer = mongoose.model("UserVolunteer", uservolunteerSchema);
 var VolNgo = mongoose.model("VolNgo", volNgoSchema);
 
 // insert data to mongoDB
 // VolNgo.create();
 
+// mongoDB 排序组合！
+// var mySort = {_id:-1};
 
-// mongoDB 排序组合！！！！
-var mySort = {_id:-1};
-
-// **************Start Restful Routing
-// Home page
+// ************** Start Restful Routing ****************
+// Home Page
 app.get('/',(req,res) => {
 	res.render("index");
 });
 
-// data visualizaiton route
+// Data Visulization Page
 app.get('/homelessdv',(req,res) => {
 	res.render("dv");
 });
 
-// ************************** VOLUNTEER SECTION *******************************************
+// ************************** VOLUNTEER Page *******************************************
 // volunteer 的 home page
-// 在find里面加mongo语法，例如：name:"Desert Mesa". 从而从数据库中获取用户输入的suburb的NGO信息，然后把这些信息通过		  	 suburbNgos变量传递给volunteer.ejs文件
-
 app.get('/volunteers', (req,res) => {
-	UserVolunteer.find({}, (err, allNgos) => {
-		if (err) {
-			console.log(err);
-		} else {
-			res.render("volunteer", {suburbNgos: allNgos});
-			UserVolunteer.deleteMany({}, function(err) {
+	//如果location 存在，那么find 所有和这个suburb匹配的NGO数据
+	var location = req.query.location;
+	var description = req.query.description;
+	if (typeof location !== "undefined") {
+		var suburb_str = location.split(",");
+		var suburb_name = suburb_str[0];
+		if (description === 'children') {
+			VolNgo.find({$and:[{suburb: suburb_name}, {children: 'y'}]}, (err, volNGOs) => {
 				if (err) {
 					console.log(err);
+				} else {
+					//console.log(volNGOs);
+					res.render("volunteer", {volNGO: volNGOs});
+				}
+			});
+		} else if (description === 'adult') {
+			VolNgo.find({$and:[{suburb: suburb_name}, {adult: 'y'}]}, (err, volNGOs) => {
+				if (err) {
+					console.log(err);
+				} else {
+					res.render("volunteer", {volNGO: volNGOs});
+				}
+			});
+		} else if (description === 'old') {
+			VolNgo.find({$and:[{suburb: suburb_name}, {old: 'y'}]}, (err, volNGOs) => {
+				if (err) {
+					console.log(err);
+				} else {
+					res.render("volunteer", {volNGO: volNGOs});
+				}
+			});
+		} else if (description === 'family') {
+			VolNgo.find({$and:[{suburb: suburb_name}, {family: 'y'}]}, (err, volNGOs) => {
+				if (err) {
+					console.log(err);
+				} else {
+					res.render("volunteer", {volNGO: volNGOs});
+				}
+			});
+		} else {
+			VolNgo.find({suburb: suburb_name}, (err, volNGOs) => {
+				if (err) {
+					console.log(err);
+				} else {
+					res.render("volunteer", {volNGO: volNGOs});
 				}
 			});
 		}
-	})
-		// .sort(mySort).limit(1);
-});
-
-// 第一步，用户在volunteer page 填写完subrub和type的时候，处理表单的信息
-app.post("/volunteers", function(req, res){
-  var description = req.body.description;
-  geocoder.geocode(req.body.location, function(err, data) {
-    if (err || !data.length) {
-      //req.flash('error', 'Invalid address');
-      return res.redirect('back');
-    }
-    var lat = data[0].latitude;
-    var lng = data[0].longitude;
-    var location = data[0].formattedAddress;  // Carnegie VIC 3163, Australia
-    var newUserVolunteer = {description: description, location: location, lat: lat, lng: lng};
-
-	  
-	// 接收表单信息后创建一个新对象并且存到数据库里
-    UserVolunteer.create(newUserVolunteer, function(err, newlyCreated){
-        if(err){
-            console.log(err);
-        } else {
-			//res.render("volunteer");
-            res.redirect("/volunteers#map");
-        }
-    });
-	  
-  });
+	} else {
+		// 第一次访问volunteer page的时候给一个数据库中没有的suburb然后什么也不显示
+		VolNgo.find({suburb: "shanghai"}, (err, volNGOs) => {
+			if (err) {
+				console.log(err);
+			} else {
+				res.render("volunteer", {volNGO: volNGOs});
+				// UserVolunteer.deleteMany({}, function(err) {
+				// 	if (err) {
+				// 		console.log(err);
+				// 	}
+				// });
+			}
+		});
+	}
 });
 // ************************** VOLUNTEER SECTION END *******************************************
 
 
 
 
+
+
+
+
+
+// set iedb's Schema
+// var volunteerSchema = new mongoose.Schema({
+// 	name: String,
+// 	postcode: Number,
+// 	charity_size: String,
+// 	main_activity: String,
+// 	main_beneficiaries: String,
+// 	Children: String,
+// 	Adult: String,
+// 	Old: String,
+// 	Family: String,
+// 	num_volunteers: Number,
+// 	net_income: Number,
+// 	address: String,
+// 	latitude: Number,
+// 	longitude: Number
+// });
+
+// 第一步，用户在volunteer page 填写完subrub和type的时候，处理表单的信息
+// app.post("/volunteers", function(req, res){
+//   var description = req.body.description;
+//   geocoder.geocode(req.body.location, function(err, data) {
+//     if (err || !data.length) {
+//       //req.flash('error', 'Invalid address');
+//       return res.redirect('back');
+//     }
+//     var lat = data[0].latitude;
+//     var lng = data[0].longitude;
+//     var location = data[0].formattedAddress;  // Carnegie VIC 3163, Australia
+//     var newUserVolunteer = {description: description, location: location, lat: lat, lng: lng};
+
+	  
+// 	// 接收表单信息后创建一个新对象并且存到数据库里
+//     UserVolunteer.create(newUserVolunteer, function(err, newlyCreated){
+//         if(err){
+//             console.log(err);
+//         } else {
+// 			//res.render("volunteer");
+//             res.redirect("/volunteers#map");
+//         }
+//     });
+	  
+//   });
+// });
 
 // app.get('/homelessness', (req,res) => {
 // 	//Get all homelessness from db

@@ -1,5 +1,5 @@
 <% include partials/header %>
-	<!-- Volunteer标题 -->
+	<!-- header of volunteer -->
 	<section class="section-intro" style="padding: 0 0; margin-bottom:20px;" id="volunteer-header">
 		<div class="header-intro parallax100 t-center p-t-135 p-b-158" id="vol-bg">
 			<span class="tit2 p-l-15 p-r-15" id="donation-title" style="color:#e2231a;">
@@ -14,148 +14,127 @@
 		</div>
 	</section>
 
+	<!-- form part of volunteer -->
 	<section style="padding-top:1rem; padding-bottom:0.5rem;">
 		<div class="container-fluid">
 			<div style="width: 40%; margin:0 auto;">
-				<form action="" , method="POST">
-					<div class="row form-group">
-						<div class="col-md-4 text-center">
-							<label class="col-form-label">
-								<strong>Type</strong>
-							</label>
+				<form action="/volunteers" method="GET"> 
+					<div class="form-group">
+						<!-- 第一行 -->
+						<div class="row">
+							<div class="col-md-4 text-center">
+								<label class="col-form-label">
+									<strong>Type</strong>
+								</label>
+							</div>
+							<div class="col-md-8">
+								<select class="form-control custom-select" name="description" placeholder="type of homeless">
+									<option value="">Choose a type of homeless people</option>
+									<option value="old">Old</option>
+									<option value="children">Children</option>
+									<option value="adult">Adult</option>
+									<option value="family">Family</option>
+								</select>
+							</div>
 						</div>
-						<div class="col-md-8">
-							<select class="form-control custom-select" name="description" placeholder="type of homeless">
-								<option value="">Choose a type of homeless people</option>
-								<option value="old">Old</option>
-								<option value="child">Child</option>
-								<option value="adult">Adult</option>
-								<option value="family">Family</option>
-							</select>
+						<br/>
+						<!-- 第二行 -->
+						<div class="row">
+							<div class="col-md-4 text-center">
+								<label for="location" class="col-form-label">
+									<strong>Suburb</strong>
+								</label>
+							</div>
+							<div class="col-md-8">
+								<input class="form-control" type="text" name="location" id="location" placeholder="Suburb, VIC">
+							</div>
 						</div>
-					</div>
-
-					<div class="row form-group">
-						<div class="col-md-4 text-center">
-							<label for="location" class="col-form-label">
-								<strong>Suburb</strong>
-							</label>
-						</div>
-						<div class="col-md-8">
-							<input class="form-control" type="text" name="location" id="location" placeholder="Carnegie, VIC" style="">
-						</div>
-
-					</div>
-					<div class="row">
-						<div class="col-md-4">
-
-						</div>
-						<div class="col-md-4">
-							<!-- <a class="btn text-uppercase js-scroll-trigger" href="/volunteers#map"> -->
-							<button class="btn btn-outline-danger btn-lg btn-block">Start!</button>
-							<!-- </a> -->
-						</div>
-						<div class="col-md-4">
-
+						<br/>
+						<!-- 第三行 -->
+						<div class="row">
+							<div class="col-md-4"></div>
+							<div class="col-md-4">
+								<input type="submit" value="Search" class="btn btn-outline-danger btn-lg btn-block"></button>
+							</div>
+							<div class="col-md-4"></div>
 						</div>
 					</div>
 				</form>
 			</div>
-			<!-- <a href="/">Go back to home page</a> -->
+		</div>
 	</section>
 
 	<section style="padding-top:0.5rem; padding-bottom:100px;">
-
-		<!-- 接收pass过来的信息，生成左边的list -->
 		<div class="row text-center" style="display:flex; flex-wrap:wrap;">
-			<% suburbNgos.forEach(ngo => { %>
+				<!-- 接收pass过来的信息，生成左边的list -->
 				<div class="col-md-3">
-					<!-- 下面是收叠卡部分 -->
 					<div id="accordion" class="thumbnail">
-						<div class="card">
-							<div class="card-header" id="headingOne">
-								<h5 class="mb-0">
-									<button class="btn btn-link collapsed" data-toggle="collapse" data-target="#collapseOne" aria-expanded="false" aria-controls="collapseOne">
-										NGO's Name
-									</button>
-								</h5>
-							</div>
+						<% volNGO.forEach(ngo => { %>
+							<div class="card">
+								<div class="card-header" id="headingOne">
+									<h5 class="mb-0">
+										<button class="btn btn-link collapsed" data-toggle="collapse" data-target="#collapseOne" aria-expanded="false" aria-controls="collapseOne">
+											<%= ngo.name %>
+										</button>
+									</h5>
+								</div>
 
-							<div id="collapseOne" class="collapse show" aria-labelledby="headingOne" data-parent="#accordion">
-								<div class="card-body">
-									<!-- <h4><%= ngo.name %></h4> -->
-									<h4>NGO name from DB</h4>
-									<h4>NGO address from DB</h4>
-									<h4>Volunteer number</h4>
-									<!-- <a href="/campgrounds/<%= ngo._id%>" class="btn btn-primary">More Info</a> -->
+								<div id="collapseOne" class="collapse show" aria-labelledby="headingOne" data-parent="#accordion">
+									<div class="card-body">
+										<ul class="text-left">
+											<li><strong>Address: </strong><%= ngo.address %></li>
+											<li><strong>Beneficiaries: </strong><%= ngo.main_beneficiaries %></li>
+											<li><strong>No.Volunteers: </strong><%= ngo.num_volunteers %></li>
+										</ul>
+									</div>
 								</div>
 							</div>
-						</div>
+						<% }) %>
 					</div>
 				</div>
-					<% }) %>
-	<!-- 	map function	 -->
+				<!-- 生成右边的 map -->
 				<div class="col-md-9" id="map" style="height:700px;">
 				</div>
 		</div>
 	</section>
 
 	<script>
-		// 从app.js 文件中接到符合条件的数据时，把他们转换成字符串，然后通过for循环遍历显示成markers
-		// Data for the markers consisting of a name, a LatLng and a zIndex for the
-		// order in which these markers should display on top of each other.
-		// var beaches = [
-		//   ['Bondi Beach', -33.890542, 151.274856, 4],
-		//   ['Coogee Beach', -33.923036, 151.259052, 5],
-		//   ['Cronulla Beach', -34.028249, 151.157507, 3],
-		//   ['Manly Beach', -33.80010128657071, 151.28747820854187, 2],
-		//   ['Maroubra Beach', -33.950198, 151.259302, 1]
-		// ];
-		// for (var i = 0; i < beaches.length; i++) {
-		// var beach = beaches[i];
-		// var marker = new google.maps.Marker({
-		// position: {lat: beach[1], lng: beach[2]},
-		// map: map,
-		// icon: image,
-		// shape: shape,
-		// title: beach[0],
-		// zIndex: beach[3]
-		// });
-		// }
 		function initMap() {
-			// 接收pass过来的信息，根据ngo.attribute 生成地图中的marker
-			<% suburbNgos.forEach( ngo => { %>
-			var lat = <%= ngo.lat %>;
-			var lng = <%= ngo.lng %>;
-			var center = {
-				lat: lat,
-				lng: lng
-			};
-			var map = new google.maps.Map(document.getElementById('map'), {
-				zoom: 10,
-				center: center,
-				scrollwheel: false,
-				gestureHandling: 'cooperative'
-			});
-			// 要显示在info window 的信息
-			var contentString = `
-			  <strong><%= ngo.location %><br />
-			  Type Of Homeless: <%= ngo.description %></strong>
-			`
-			var infowindow = new google.maps.InfoWindow({
-				content: contentString
-			});
-			var marker = new google.maps.Marker({
-				position: center,
-				map: map
-			});
-			marker.addListener('click', function() {
-				infowindow.open(map, marker);
-				map.setZoom(12);
-				map.setCenter(marker.getPosition());
-			});
+			<% volNGO.forEach( ngo => { %>
+				var latitude = <%= ngo.latitude %>;
+				var longitude = <%= ngo.longitude %>;
+				var center = {
+					lat: latitude,
+					lng: longitude
+				};
+				var map = new google.maps.Map(document.getElementById('map'), {
+					zoom: 10,
+					center: center,
+					gestureHandling: 'cooperative'
+				});
+				// 要显示在info window 的信息
+				var contentString = `
+				  <strong><%= ngo.name %><br />
+				  Type Of Homeless: <%= ngo.address %><br/>
+				  Suburb: <%= ngo.suburb %></strong> 
+				`
+				var infowindow = new google.maps.InfoWindow({
+					content: contentString
+				});
+				var marker = new google.maps.Marker({
+					position: {lat: latitude, lng: longitude},
+					map: map
+				});
+				marker.addListener('click', function() {
+					infowindow.open(map, marker);
+					map.setZoom(15);
+					map.setCenter(marker.getPosition());
+				});
 			<% }) %>
 		}
+		
+		
+		
 	</script>
 	<script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDEmNNZ8gW73CShJzZLosV-kb3_JYtFua0&callback=initMap"></script>
 
