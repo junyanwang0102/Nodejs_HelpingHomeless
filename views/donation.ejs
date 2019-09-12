@@ -11,199 +11,51 @@
 		</div>
 	</section>
 
-	<!-- form of volunteer -->
+	<!-- form of donation -->
 	<section style="padding-top:1rem; padding-bottom:2rem;">
 		<div class="container-fluid">
 			<div style="margin:0 auto;">
 				<form action="/donations" method="GET"> 
 					<div class="form-group">
 						<div class="row">
-							<div class="col-md-4">
-								<select class="form-control selectpicker show-tick show-menu-arrow" data-style="btn-warning" name="description" id="description" placeholder="Choose a type of homeless">
-									<option>Choose a category of homeless</option>
-									<option value="children">Children</option>
-									<option value="adult">Adult</option>
-									<option value="old">Old</option>
-									<option value="family">Family</option>
-								</select>
+							<div class="col-md-3">
 							</div>
-							
-							<div class="col-md-4">
+							<div class="col-md-3">
 								<select class="form-control selectpicker dropdown show-tick show-menu-arrow" data-live-search="true" data-size="6" data-style="btn-warning" name="location" id="location" placeholder="Select or search your suburb">
 									<option>Select or search your suburb</option>
-									<option value="melbourne">Melbourne</option>
-									<option value="kew">Kew</option>
-									<option value="box hill">Box Hill</option>
-									<option value="richmond">Richmond</option>
-									<option value="dandenong">Dandenong</option>
-									<option value="malvern">Malvern</option>
-									<option value="heidelberg">Heidelberg</option>
-									<option value="canterbury">Canterbury</option>
+									<option value="Melbourne">Melbourne</option>
+									<option value="Fitzroy">Fitzroy</option>
+									<option value="Collingwood">Collingwood</option>
+									<option value="North Melbourne">North Melbourne</option>
+									<option value="Kensington">Kensington</option>
+									<option value="Carlton North">Carlton North</option>
+									<option value="St Kilda">St Kilda</option>
+									<option value="West Melbourne">West Melbourne</option>
 									<option value="north melbourne">North Melbourne</option>
-									<option value="st kilda">St Kilda</option>
-									<option value="ascot vale">Ascot Vale</option>
-									<option value="mulgrave">Mulgrave</option>
-									<option value="macleod">Macleod</option>
-									<option value="craigieburn">Craigieburn</option>
-									<option value="rowville">Rowville</option>
-									<option value="clayton south">Clayton South</option>
-									<option value="balwyn">Balwyn</option>
-									<option value="fairfield">Fairfield</option>
-									<option value="albert park">Albert Park</option>
-									<option value="blackburn">Blackburn</option>
-									<option value="ashburton">Ashburton</option>
-									<option value="hawthorn">Hawthorn</option>
-									<option value="caulfield north">Caulfield North</option>
-									<option value="caulfield south">Caulfield South</option>
-									<option value="parkville">Parkville</option>
-									<option value="keysborough">Keysborough</option>
-									<option value="toorak">Toorak</option>
-									<option value="hawthorn east">Hawthorn East</option>
-									<option value="bentleigh">Bentleigh</option>
-									<option value="moorabbin">Moorabbin</option>
-									<option value="thornbury">Thornbury</option>
-									<option value="epping">Epping</option>
-									<option value="doveton">Doveton</option>
-									<option value="wyndham vale">Wyndham Vale</option>
-									<option value="west footscray">West Footscray</option>
-									<option value="burwood">Burwood</option>
-									<option value="sunshine">Sunshine</option>
-									<option value="wantirna south">Wantirna South</option>
-									<option value="bayswater">Bayswater</option>
-									<option value="werribee">Werribee</option>
-									<option value="lilydale">Lilydale</option>
-									<option value="ormond">Ormond</option>
-									<option value="elsternwick">Elsternwick</option>
-									<option value="carlton">Carlton</option>
-									<option value="caroline springs">Caroline Springs</option>
-									<option value="niddrie">Niddrie</option>
-									<option value="glen iris">Glen Iris</option>
-									<option value="tarneit">Tarneit</option>
-									<option value="st kilda east">St Kilda East</option>
-									<option value="st albans">St Albans</option>
-									<option value="dallas">Dallas</option>
-									<option value="south melbourne">South Melbourne</option>
-									<option value="bentleigh east">Bentleigh East</option>
-									<option value="preston">Preston</option>
-									<option value="braeside">Braeside</option>
-									<option value="frankston">Frankston</option>
-									<option value="broadmeadows">Broadmeadows</option>
-									<option value="ferntree gully">Ferntree gully</option>
-									<option value="briar hill">Briar Hill</option>
-									<option value="collingwood">Collingwood</option>
-									<option value="noble park">Noble Park</option>
-									<option value="ringwood north">Ringwood North</option>
-									<option value="croydon">Croydon</option>
-									<option value="mill park">Mill Park</option>
-									<option value="deer park">Deer Park</option>
-									<option value="glen waverley">Glen Waverley</option>
-									<option value="watsonia">Watsonia</option>
-									<option value="blackburn south">Blackburn South</option>
-									<option value="east brunswick">East Brunswick</option>
-									<option value="north fitzroy">North Fitzroy</option>
-									<option value="eltham">Eltham</option>
-									<option value="ringwood east">Ringwood East</option>
-									<option value="deepdene">Deepdene</option>
-									<option value="essendon">Essendon</option>
-									<option value="mount waverley">Mount Waverley</option>
-									<option value="doncaster east">Doncaster east</option>
-									<option value="mentone">Mentone</option>
-									<option value="wantirna">Wantirna</option>
-									<option value="carlton north">Carlton North</option>
-									<option value="surrey hills">Surrey Hills</option>
-									<option value="east st kilda">East St Kilda</option>
-									<option value="moonee ponds">Moonee Ponds</option>
-									<option value="northcote">Northcote</option>
-									<option value="fitzroy">Fitzroy</option>
-									<option value="boronia">Boronia</option>
-									<option value="abbotsford">Abbotsford</option>
-									<option value="camberwell">Camberwell</option>
-									<option value="braybrook">Braybrook</option>
-									<option value="windsor">Windsor</option>
-									<option value="flemington">Flemington</option>
-									<option value="malvern east">Malvern East</option>
-									<option value="keilor downs">Keilor Downs</option>
-									<option value="meadow heights">Meadow Heights</option>
-									<option value="truganina">Truganina</option>
-									<option value="diamond creek">Diamond Creek</option>
-									<option value="greenvale">Greenvale</option>
-									<option value="clayton">Clayton</option>
-									<option value="ringwood">Ringwood</option>
-									<option value="reservoir">Reservoir</option>
-									<option value="footscray">Footscray</option>
-									<option value="brunswick">Brunswick</option>
-									<option value="cheltenham">Cheltenham</option>
-									<option value="greensborough">Greensborough</option>
-									<option value="north caulfield">North Caulfield</option>
-									<option value="lysterfield">Lysterfield</option>
-									<option value="oakleigh">Oakleigh</option>
-									<option value="armadale">Armadale</option>
-									<option value="point cook">Point Cook</option>
-									<option value="thomastown">Thomastown</option>
-									<option value="balaclava">Balaclava</option>
-									<option value="croydon hills">Croydon Hills</option>
-									<option value="sandringham">Sandringham</option>
-									<option value="forest hill">Forest Hill</option>
-									<option value="st. kilda">St. Kilda</option>
-									<option value="lalor">Lalor</option>
-									<option value="carrum downs">Carrum Downs</option>
-									<option value="donvale">Donvale</option>
-									<option value="hoppers crossing">Hoppers Crossing</option>
-									<option value="mickleham">Mickleham</option>
-									<option value="east brighton">East Brighton</option>
-									<option value="bonbeach">Bonbeach</option>
-									<option value="studfield">Studfield</option>
-									<option value="black rock">Black Rock</option>
-									<option value="brighton">Brighton</option>
-									<option value="springvale">Springvale</option>
-									<option value="aspendale gardens">Aspendale Gardens</option>
-									<option value="mordialloc">Mordialloc</option>
-									<option value="yarraville">Yarraville</option>
-									<option value="mitcham">Mitcham</option>
-									<option value="upwey">Upwey</option>
-									<option value="dandenong north">Dandenong North</option>
-									<option value="altona">Altona</option>
-									<option value="seaford">Seaford</option>
-									<option value="port melbourne">Port Melbourne</option>
-									<option value="burwood east">Burwood East</option>
-									<option value="gladstone park">Gladstone Park</option>
-									<option value="caulfield">Caulfield</option>
-									<option value="scoresby">Scoresby</option>
-									<option value="brighton east">Brighton east</option>
-									<option value="heidelberg west">Heidelberg West</option>
-									<option value="bayswater north">Bayswater North</option>
-									<option value="kilsyth south">Kilsyth South</option>
-									<option value="belgrave heights">Belgrave Heights</option>
-									<option value="watsonia north">Watsonia North</option>
-									<option value="clarinda">Clarinda</option>
-									<option value="coburg">Coburg</option>
-									<option value="kew east">Kew East</option>
-									<option value="fitzroy north">Fitzroy North</option>
-									<option value="carnegie">Carnegie</option>
-									<option value="bulleen">Bulleen</option>
-									<option value="tullamarine">Tullamarine</option>
-									<option value="bundoora">Bundoora</option>
-									<option value="alphington">Alphington</option>
-									<option value="balwyn north">Balwyn North</option>
-									<option value="brunswick west">Brunswick West</option>
-									<option value="hampton">Hampton</option>
-									<option value="maidstone">Maidstone</option>
-									<option value="seabrook">Seabrook</option>
-									<option value="east malvern">East Malvern</option>
-									<option value="carlton south">Carlton South</option>
-									<option value="maribyrnong">Maribyrnong</option>
-									<option value="mt waverley">Mt Waverley</option>
-									<option value="brunswick north">Brunswick North</option>
-									<option value="south yarra">South Yarra</option>
-									<option value="ivanhoe">Ivanhoe</option>
-									<option value="frankston south">Frankston South</option>
+									<option value="Carlton">Carlton</option>
+									<option value="East Melbourne">East Melbourne</option>
+									<option value="South Melbourne">South Melbourne</option>
+									<option value="Richmond">Richmond</option>
+									<option value="Flemington">Flemington</option>
+									<option value="Parkville">Parkville</option>
+									<option value="Footscray">Footscray</option>
+									<option value="Box Hill">Box Hill</option>
+									<option value="Preston">Preston</option>
+									<option value="Caulfield South">Caulfield South</option>
+									<option value="Albert Park">Albert Park</option>
+									<option value="Dandenong">Dandenong</option>
+									<option value="Moonee Ponds">Moonee Ponds</option>
+									<option value="Abbotsford">Abbotsford</option>
+									<option value="North Fitzroy">North Fitzroy</option>
+									<option value="Northcote">Northcote</option>
+									<option value="Glenroy">Glenroy</option>
 								</select>
 							</div>
-						
-							<div class="col-md-4">
-								<input type="submit" value="Search" class="btn btn-outline-danger btn-lg btn-block" style="line-height:50%;">
+							<div class="col-md-3">
+								<input id="sub" type="submit" value="Start" class="btn btn-outline-danger btn-lg btn-block" style="line-height:50%;">
 							</div>
-							
+							<div class="col-md-3">
+							</div>
 						</div>
 					</div>
 				</form>
@@ -212,13 +64,12 @@
 	</section>
 	
 	<div class="row">
-		<% if(volNGO.length !== 0){ %>
+		<% if(donationNGO.length !== 0){ %>
 			<div class="col-md-4">
-				
 			</div>
 			<div class="col-md-4">
 				<h3 class="t-center" style="font-size:150%; color:red;">
-					<span><%= volNGO.length %> NGOs in <%= volNGO[0].suburb %>.	</span>
+					<span><%= donationNGO.length %> NGOs in <%= donationNGO[0].Suburb %>.</span>
 				</h3>
 			</div>
 			<div class="col-md-4">
@@ -240,12 +91,12 @@
 		<div class="row text-center" style="display:flex; flex-wrap:wrap;">
 				<div class="col-md-3" style="overflow-y: auto; height:800px;">
 					<div id="accordion" class="thumbnail">
-						<% volNGO.forEach(ngo => { %>
+						<% donationNGO.forEach(ngo => { %>
 							<div class="card">
 								<div class="card-header" id="headingOne">
-									<h5 class="mb-0">
-										<button class="btn btn-link collapsed" data-toggle="collapse" data-target="#collapse<%= ngo._id %>" aria-expanded="false" aria-controls="collapse<%= ngo._id %>" style="text-decoration:none;" >
-											<span style="color:black;"><%= ngo.name %></span>
+									<h5 class="mb-0" id="span1">
+										<button id="btn1" class="btn btn-link collapsed" data-toggle="collapse" data-target="#collapse<%= ngo._id %>" aria-expanded="false" aria-controls="collapse<%= ngo._id %>" style="text-decoration:none;">
+											<span id="span1" style="color:black;"><%=ngo.Name%></span>
 										</button>
 									</h5>
 								</div>
@@ -253,9 +104,11 @@
 								<div id="collapse<%= ngo._id %>" class="collapse show" aria-labelledby="headingOne" data-parent="#accordion">
 									<div class="card-body">
 										<ul class="text-left">
-											<li><strong>Address: </strong><br/><%= ngo.address %></li>
-											<li><strong>Beneficiaries: </strong><br/><%= ngo.main_beneficiaries %></li>
-											<li><strong>No.Volunteers: </strong><br/><%= ngo.num_volunteers %></li>
+											<li><strong>Description: </strong><br/><%= ngo.What %></li>
+											<li><strong>Address: </strong><br/><%= ngo.Address %></li>
+											<li><strong>Phone: </strong><br/><%= ngo.Phone %></li>
+											<li><strong>Website: </strong><br/><a href="https://<%= ngo.Website %>" target="_blank"><%= ngo.Website %></a></li>
+											<li><strong>Public Holidays: </strong><br/><%= ngo.Public_holidays %></li>
 										</ul>
 									</div>
 								</div>
@@ -272,9 +125,9 @@
 	<script>
 		function initMap() {
 			var infowindow = new google.maps.InfoWindow();
-			<% volNGO.forEach( ngo => { %>
-				var latitude = <%= ngo.latitude %>;
-				var longitude = <%= ngo.longitude %>;
+			<% donationNGO.forEach( ngo => { %>
+				var latitude = <%= ngo.Latitude %>;
+				var longitude = <%= ngo.Longitude %>;
 				var center = {
 					lat: latitude,
 					lng: longitude
@@ -287,11 +140,13 @@
 			<% }) %>
 			
 			<% function placeMarker(ngo) { %>
-				<% var lat = ngo.latitude; %>
-				<% var lng = ngo.longitude; %>
-				<% var name = ngo.name; %>
-				<% var address = ngo.address; %>
-				<% var volNum = ngo.num_volunteers; %>
+				<% var lat = ngo.Latitude; %>
+				<% var lng = ngo.Longitude; %>
+				<% var name = ngo.Name; %>
+				<% var address = ngo.Address; %>
+				<% var phone = ngo.Phone; %>
+				<% var website = ngo.Website; %>
+				<% var public_holidays = ngo.Public_holidays; %>
 				var latLng = new google.maps.LatLng(<%=lat%>, <%=lng%>);
 				var marker = new google.maps.Marker({ 
 					position: latLng,
@@ -301,7 +156,7 @@
 				marker.addListener('click', function() {
 					//marker.getPosition(this.position);
 					infowindow.close();
-					infowindow.setContent(`<div style="padding: 10px;"> <p class="text-left" style="color:red;"><%=name%></p><br /><p><%=address%></p><br /><p class="text-left">Number of volunteers:      <strong><%=volNum%></strong></p></div>`);
+					infowindow.setContent(`<div style="padding: 10px;"><p class="text-left" style="color:red;"><strong><%=name%></strong></p><br /><p><%=address%></p><br /><p class="text-left">Phone: <strong><%=phone%></strong></p><br /><p class="text-left">Website: <a href="https://<%=website%>" target="_blank"><strong><%= website %></strong></a></p><br /><p class="text-left">Public Holidays: <strong><%=public_holidays%></strong></p></div>`);
 					infowindow.open(map, marker);
 					infowindow.setPosition(this.position);
 					map.setZoom(15);
@@ -313,8 +168,8 @@
 			  	});
 			<% } %>
 									   
-			<% for (var i = 0; i < volNGO.length; i++) { %>
-				<% placeMarker(volNGO[i]); %>
+			<% for (var i = 0; i < donationNGO.length; i++) { %>
+				<% placeMarker(donationNGO[i]); %>
 			<% } %>
 			
 		}

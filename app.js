@@ -48,8 +48,32 @@ var volNgoSchema = new mongoose.Schema({
 	suburb: String
 });
 
+var donationNgoSchema = new mongoose.Schema({
+	Name: String,
+	What: String,
+	Phone: String,
+	Website: String,
+	Monday: String,
+	Tuesday: String,
+	Wednesday: String,
+	Thursday: String,
+	Friday: String,
+	Saturday: String,
+	Sunday: String,
+	Public_holidays: String,
+	Tram_routes: String,
+	Address: String,
+	Latitude: Number,
+	Longitude: Number,
+	Suburb: String
+});
+
 var UserVolunteer = mongoose.model("UserVolunteer", uservolunteerSchema);
 var VolNgo = mongoose.model("VolNgo", volNgoSchema);
+var DonationNgo = mongoose.model("donationNgo", donationNgoSchema);
+
+// 插数据代码
+// DonationNgo.create();
 
 // ************** Start Restful Routing ****************
 // Home Page
@@ -126,59 +150,22 @@ app.get('/volunteers', (req,res) => {
 // Donation page
 app.get('/donations', (req,res) => {
 	var location = req.query.location;
-	var description = req.query.description;
 	if (typeof location !== "undefined") {
 		var suburb_str = location.split(",");
 		var suburb_name = suburb_str[0];
-		if (description === 'children') {
-			VolNgo.find({$and:[{suburb: suburb_name}, {children: 'y'}]}, (err, volNGOs) => {
-				if (err) {
-					console.log(err);
-				} else {
-					//console.log(volNGOs);
-					res.render("donation", {volNGO: volNGOs});
-				}
-			});
-		} else if (description === 'adult') {
-			VolNgo.find({$and:[{suburb: suburb_name}, {adult: 'y'}]}, (err, volNGOs) => {
-				if (err) {
-					console.log(err);
-				} else {
-					res.render("donation", {volNGO: volNGOs});
-				}
-			});
-		} else if (description === 'old') {
-			VolNgo.find({$and:[{suburb: suburb_name}, {old: 'y'}]}, (err, volNGOs) => {
-				if (err) {
-					console.log(err);
-				} else {
-					res.render("donation", {volNGO: volNGOs});
-				}
-			});
-		} else if (description === 'family') {
-			VolNgo.find({$and:[{suburb: suburb_name}, {family: 'y'}]}, (err, volNGOs) => {
-				if (err) {
-					console.log(err);
-				} else {
-					res.render("donation", {volNGO: volNGOs});
-				}
-			});
-		} else {
-			VolNgo.find({suburb: suburb_name}, (err, volNGOs) => {
-				if (err) {
-					console.log(err);
-				} else {
-					res.render("donation", {volNGO: volNGOs});
-				}
-			});
-		}
-	} else {
-		// 第一次访问volunteer page的时候给一个数据库中没有的suburb然后什么也不显示
-		VolNgo.find({suburb: "shanghai"}, (err, volNGOs) => {
+		DonationNgo.find({Suburb: suburb_name}, (err, donationNGOs) => {
 			if (err) {
 				console.log(err);
 			} else {
-				res.render("donation", {volNGO: volNGOs});
+				res.render("donation", {donationNGO: donationNGOs});
+			}
+		});
+	} else {
+		DonationNgo.find({suburb: "shanghai"}, (err, donationNGOs) => {
+			if (err) {
+				console.log(err);
+			} else {
+				res.render("donation", {donationNGO: donationNGOs});
 			}
 		});
 	}
