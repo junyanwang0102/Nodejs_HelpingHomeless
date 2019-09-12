@@ -1,52 +1,38 @@
 <% include partials/header %>
 	<!-- header of volunteer -->
 	<section class="section-intro" style="padding: 0 0; margin-bottom:20px;" id="volunteer-header">
-		<div class="header-intro parallax100 t-center p-t-135 p-b-158" id="vol-bg">
+		<div class="header-intro parallax100 t-center p-t-135" id="vol-bg">
 			<span class="tit2 p-l-15 p-r-15" id="donation-title" style="color:#e2231a;">
 				Volunteer
 				<br>
 			</span>
 			<br>
 			<h3 class="t-center p-l-15 p-r-15 p-t-3" style="font-size:150%; color:white;">
-				<span style="font-size:150%;">Choose the type of homeless and enter your suburb to
+				<span style="font-size:150%;">Choose the category of homeless and your suburb to
 					<br/>get recomendations!</span>
 			</h3>
 		</div>
 	</section>
 
 	<!-- form of volunteer -->
-	<section style="padding-top:1rem; padding-bottom:0.5rem;">
+	<section style="padding-top:1rem; padding-bottom:2rem;">
 		<div class="container-fluid">
-			<div style="width: 40%; margin:0 auto;">
+			<div style="margin:0 auto;">
 				<form action="/volunteers" method="GET"> 
 					<div class="form-group">
-						<!-- 第一行 -->
 						<div class="row">
-							<div class="col-md-4 text-center">
-								<label class="col-form-label">
-									<strong>Type</strong>
-								</label>
-							</div>
-							<div class="col-md-8">
-								<select class="form-control selectpicker" data-style="btn-warning" name="description" id="description" placeholder="Choose a type of homeless">
-									<option>Choose a type of homeless</option>
+							<div class="col-md-4">
+								<select class="form-control selectpicker show-tick show-menu-arrow" data-style="btn-warning" name="description" id="description" placeholder="Choose a type of homeless">
+									<option>Choose a category of homeless</option>
 									<option value="children">Children</option>
 									<option value="adult">Adult</option>
 									<option value="old">Old</option>
 									<option value="family">Family</option>
 								</select>
 							</div>
-						</div>
-						<br/>
-						<!-- 第二行 -->
-						<div class="row">
-							<div class="col-md-4 text-center">
-								<label for="location" class="col-form-label">
-									<strong>Suburb</strong>
-								</label>
-							</div>
-							<div class="col-md-8">
-								<select class="form-control selectpicker dropdown" data-live-search="true" data-size="5" data-style="btn-warning" name="location" id="location" placeholder="Select or search your suburb">
+							
+							<div class="col-md-4">
+								<select class="form-control selectpicker dropdown show-tick show-menu-arrow" data-live-search="true" data-size="6" data-style="btn-warning" name="location" id="location" placeholder="Select or search your suburb">
 									<option>Select or search your suburb</option>
 									<option value="melbourne">Melbourne</option>
 									<option value="kew">Kew</option>
@@ -216,15 +202,11 @@
 									<option value="frankston south">Frankston South</option>
 								</select>
 							</div>
-						</div>
-						<br/>
-						<!-- 第三行 -->
-						<div class="row">
-							<div class="col-md-4"></div>
+						
 							<div class="col-md-4">
-								<input type="submit" value="Search" class="btn btn-outline-danger btn-lg btn-block">
+								<input type="submit" value="Search" class="btn btn-outline-danger btn-lg btn-block" style="line-height:50%;">
 							</div>
-							<div class="col-md-4"></div>
+							
 						</div>
 					</div>
 				</form>
@@ -233,28 +215,40 @@
 	</section>
 	
 	<div class="row">
-		<div class="col-md-3">
 		<% if(volNGO.length !== 0){ %>
-			<h3 class="t-center p-r-15 p-t-3" style="font-size:150%; color:red;">
-				<span><%= volNGO.length %> NGOs in <%= volNGO[0].suburb %>.	</span>
-			</h3>
+			<div class="col-md-4">
+				
+			</div>
+			<div class="col-md-4">
+				<h3 class="t-center" style="font-size:150%; color:red;">
+					<span><%= volNGO.length %> NGOs in <%= volNGO[0].suburb %>.	</span>
+				</h3>
+			</div>
+			<div class="col-md-4">
+			</div>
+		<% } else { %>
+			<div class="col-md-4">
+			</div>
+			<div class="col-md-4">
+				<h3 class="t-center p-t-3" style="font-size:150%; color:red;">
+					<span>Please Make The Selction</span>
+				</h3>
+			</div>
+			<div class="col-md-4">
+			</div>
 		<% } %>
-		</div>
-		<div class="col-md-9 text-left">
-		</div>
 	</div>
 
 	<section style="padding-top:0.5rem; padding-bottom:100px;">
 		<div class="row text-center" style="display:flex; flex-wrap:wrap;">
-				<!-- 接收pass过来的信息，生成左边的list -->
 				<div class="col-md-3" style="overflow-y: auto; height:800px;">
 					<div id="accordion" class="thumbnail">
 						<% volNGO.forEach(ngo => { %>
 							<div class="card">
 								<div class="card-header" id="headingOne">
 									<h5 class="mb-0">
-										<button class="btn btn-link collapsed" data-toggle="collapse" data-target="#collapse<%= ngo._id %>" aria-expanded="false" aria-controls="collapse<%= ngo._id %>" id="<%= ngo._id %>" value="<%= ngo.longitude %>">
-											<%= ngo.name %>
+										<button class="btn btn-link collapsed" data-toggle="collapse" data-target="#collapse<%= ngo._id %>" aria-expanded="false" aria-controls="collapse<%= ngo._id %>" style="text-decoration:none;" >
+											<span style="color:black;"><%= ngo.name %></span>
 										</button>
 									</h5>
 								</div>
@@ -289,7 +283,7 @@
 					lng: longitude
 				};
 				var map = new google.maps.Map(document.getElementById('map'), {
-					zoom: 13,
+					zoom: 15,
 					center: center,
 					gestureHandling: 'cooperative'
 				});
@@ -300,6 +294,7 @@
 				<% var lng = ngo.longitude; %>
 				<% var name = ngo.name; %>
 				<% var address = ngo.address; %>
+				<% var volNum = ngo.num_volunteers; %>
 				var latLng = new google.maps.LatLng(<%=lat%>, <%=lng%>);
 				var marker = new google.maps.Marker({ 
 					position: latLng,
@@ -309,7 +304,7 @@
 				marker.addListener('click', function() {
 					//marker.getPosition(this.position);
 					infowindow.close();
-					infowindow.setContent(`<div id='infowindow' style="padding: 10px;"> Name:"<%=name%>"<br />Address:"<%=address%>" </div>`);
+					infowindow.setContent(`<div style="padding: 10px;"> <p class="text-left" style="color:red;"><%=name%></p><br /><p><%=address%></p><br /><p class="text-left">Number of volunteers:      <strong><%=volNum%></strong></p></div>`);
 					infowindow.open(map, marker);
 					infowindow.setPosition(this.position);
 					map.setZoom(15);
