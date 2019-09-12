@@ -18,7 +18,7 @@
 	<section style="padding-top:1rem; padding-bottom:0.5rem;">
 		<div class="container-fluid">
 			<div style="width: 40%; margin:0 auto;">
-				<form method="GET"> 
+				<form action="/volunteers" method="GET"> 
 					<div class="form-group">
 						<!-- 第一行 -->
 						<div class="row">
@@ -231,17 +231,29 @@
 			</div>
 		</div>
 	</section>
+	
+	<div class="row">
+		<div class="col-md-3">
+		<% if(volNGO.length !== 0){ %>
+			<h3 class="t-center p-r-15 p-t-3" style="font-size:150%; color:red;">
+				<span><%= volNGO.length %> NGOs in <%= volNGO[0].suburb %>.	</span>
+			</h3>
+		<% } %>
+		</div>
+		<div class="col-md-9 text-left">
+		</div>
+	</div>
 
 	<section style="padding-top:0.5rem; padding-bottom:100px;">
 		<div class="row text-center" style="display:flex; flex-wrap:wrap;">
 				<!-- 接收pass过来的信息，生成左边的list -->
-				<div class="col-md-3" style="overflow-y: scroll; height:700px;">
+				<div class="col-md-3" style="overflow-y: auto; height:800px;">
 					<div id="accordion" class="thumbnail">
 						<% volNGO.forEach(ngo => { %>
 							<div class="card">
 								<div class="card-header" id="headingOne">
 									<h5 class="mb-0">
-										<button class="btn btn-link collapsed" data-toggle="collapse" data-target="#collapse<%= ngo._id %>" aria-expanded="false" aria-controls="collapse<%= ngo._id %>" id="<%= ngo.latitude %>" value="<%= ngo.longitude %>">
+										<button class="btn btn-link collapsed" data-toggle="collapse" data-target="#collapse<%= ngo._id %>" aria-expanded="false" aria-controls="collapse<%= ngo._id %>" id="<%= ngo._id %>" value="<%= ngo.longitude %>">
 											<%= ngo.name %>
 										</button>
 									</h5>
@@ -261,7 +273,7 @@
 					</div>
 				</div>
 				<!-- 生成右边的 map -->
-				<div class="col-md-9" id="map" style="height:700px;">
+				<div class="col-md-9" id="map" style="height:800px;">
 				</div>
 		</div>
 	</section>
