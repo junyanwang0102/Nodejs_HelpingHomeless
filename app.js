@@ -62,7 +62,7 @@ app.get('/homelessdv',(req,res) => {
 	res.render("dv");
 });
 
-// volunteer page
+// Volunteer page
 app.get('/volunteers', (req,res) => {
 	var location = req.query.location;
 	var description = req.query.description;
@@ -118,6 +118,67 @@ app.get('/volunteers', (req,res) => {
 				console.log(err);
 			} else {
 				res.render("volunteer", {volNGO: volNGOs});
+			}
+		});
+	}
+});
+
+// Donation page
+app.get('/donations', (req,res) => {
+	var location = req.query.location;
+	var description = req.query.description;
+	if (typeof location !== "undefined") {
+		var suburb_str = location.split(",");
+		var suburb_name = suburb_str[0];
+		if (description === 'children') {
+			VolNgo.find({$and:[{suburb: suburb_name}, {children: 'y'}]}, (err, volNGOs) => {
+				if (err) {
+					console.log(err);
+				} else {
+					//console.log(volNGOs);
+					res.render("donation", {volNGO: volNGOs});
+				}
+			});
+		} else if (description === 'adult') {
+			VolNgo.find({$and:[{suburb: suburb_name}, {adult: 'y'}]}, (err, volNGOs) => {
+				if (err) {
+					console.log(err);
+				} else {
+					res.render("donation", {volNGO: volNGOs});
+				}
+			});
+		} else if (description === 'old') {
+			VolNgo.find({$and:[{suburb: suburb_name}, {old: 'y'}]}, (err, volNGOs) => {
+				if (err) {
+					console.log(err);
+				} else {
+					res.render("donation", {volNGO: volNGOs});
+				}
+			});
+		} else if (description === 'family') {
+			VolNgo.find({$and:[{suburb: suburb_name}, {family: 'y'}]}, (err, volNGOs) => {
+				if (err) {
+					console.log(err);
+				} else {
+					res.render("donation", {volNGO: volNGOs});
+				}
+			});
+		} else {
+			VolNgo.find({suburb: suburb_name}, (err, volNGOs) => {
+				if (err) {
+					console.log(err);
+				} else {
+					res.render("donation", {volNGO: volNGOs});
+				}
+			});
+		}
+	} else {
+		// 第一次访问volunteer page的时候给一个数据库中没有的suburb然后什么也不显示
+		VolNgo.find({suburb: "shanghai"}, (err, volNGOs) => {
+			if (err) {
+				console.log(err);
+			} else {
+				res.render("donation", {volNGO: volNGOs});
 			}
 		});
 	}
