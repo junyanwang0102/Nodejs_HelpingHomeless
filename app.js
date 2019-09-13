@@ -61,7 +61,6 @@ var donationNgoSchema = new mongoose.Schema({
 	Saturday: String,
 	Sunday: String,
 	Public_holidays: String,
-	Tram_routes: String,
 	Address: String,
 	Latitude: Number,
 	Longitude: Number,
@@ -74,6 +73,9 @@ var DonationNgo = mongoose.model("donationNgo", donationNgoSchema);
 
 // 插数据代码
 // DonationNgo.create();
+
+// 删数据代码
+// DonationNgo.remove({}, function(err) {});
 
 // ************** Start Restful Routing ****************
 // Home Page

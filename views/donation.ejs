@@ -167,7 +167,7 @@
 				marker.addListener('click', function() {
 					//marker.getPosition(this.position);
 					infowindow.close();
-					infowindow.setContent(`<div style="padding: 10px;"><p class="text-left" style="color:red;"><strong><%=name%></strong></p><br /><p><%=address%></p><br /><p class="text-left">Phone: <strong><%=phone%></strong></p><br /><p class="text-left">Website: <a href="https://<%=website%>" target="_blank"><strong><%= website %></strong></a></p><br /><p class="text-left">Public Holidays: <strong><%=public_holidays%></strong></p></div>`);
+					infowindow.setContent(`<div style="padding: 10px;"><p class="text-left" style="color:red;"><strong><%=name%></strong></p><br /><p class="text-left"><%=address%></p><br /><p class="text-left">Phone: <strong><%=phone%></strong></p><br /><p class="text-left">Website: <a href="https://<%=website%>" target="_blank"><strong style="color:green;"><%= website %></strong></a></p><br /><p class="text-left">Public Holidays: <strong><%=public_holidays%></strong></p></div>`);
 					infowindow.open(map, marker);
 					infowindow.setPosition(this.position);
 					map.setZoom(15);
