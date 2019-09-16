@@ -1,64 +1,18 @@
 <% include partials/header %>
 	<!-- header of donation -->
 	<header class="masthead donationheader" id="donation-bg">
-		<div class="overlay"></div>
+		<div class="overlay" style="padding-top:20px;"></div>
 		<div class="container">
-			<div class="intro-text" style="padding-top:160px;">
+			<div class="intro-text" style="padding-top:200px;">
 				<div class="intro-lead-in" style="font-size:70px;"><strong>Donate</strong>	
 				</div>
-				<br /><br /><br /><br />
-				<!-- <p class="intro-lead-in" style="color:white; font-size:30px; padding-left:80px; padding-right:80px;">ITEMS RATHER THAN MONEY!</p> -->
-				<form action="/donations" method="GET"> 
-					<div class="form-group">
-						<div class="row">
-							<div class="col-md-2">
-							</div>
-							<div class="col-md-4">
-								<select class="form-control selectpicker show-tick show-menu-arrow dropup" data-live-search="true" data-dropup-auto="false" data-size="5" data-style="btn-warning" name="location" id="location" placeholder="Select or search your suburb" style="z-index: 99; position: relative;">
-									<option>Select or search your suburb</option>
-									<option value="Melbourne">Melbourne</option>
-									<option value="Fitzroy">Fitzroy</option>
-									<option value="Collingwood">Collingwood</option>
-									<option value="North Melbourne">North Melbourne</option>
-									<option value="Kensington">Kensington</option>
-									<option value="Carlton North">Carlton North</option>
-									<option value="St Kilda">St Kilda</option>
-									<option value="West Melbourne">West Melbourne</option>
-									<option value="north melbourne">North Melbourne</option>
-									<option value="Carlton">Carlton</option>
-									<option value="East Melbourne">East Melbourne</option>
-									<option value="South Melbourne">South Melbourne</option>
-									<option value="Richmond">Richmond</option>
-									<option value="Flemington">Flemington</option>
-									<option value="Parkville">Parkville</option>
-									<option value="Footscray">Footscray</option>
-									<option value="Box Hill">Box Hill</option>
-									<option value="Preston">Preston</option>
-									<option value="Caulfield South">Caulfield South</option>
-									<option value="Albert Park">Albert Park</option>
-									<option value="Dandenong">Dandenong</option>
-									<option value="Moonee Ponds">Moonee Ponds</option>
-									<option value="Abbotsford">Abbotsford</option>
-									<option value="North Fitzroy">North Fitzroy</option>
-									<option value="Northcote">Northcote</option>
-									<option value="Glenroy">Glenroy</option>
-								</select>
-							</div>
-							<div class="col-md-4">
-								<input id="sub" type="submit" value="Start" class="btn btn-outline-danger btn-lg btn-block" style="line-height:50%;">
-							</div>
-							<div class="col-md-2">
-							</div>
-						</div>
-					</div>
-				</form>
-				
+				<br /><br />
+				<p class="intro-lead-in" style="color:white; font-size:30px; padding-left:80px; padding-right:80px;">ITEMS RATHER THAN MONEY!</p>
 			</div>
 		</div>
 	</header>
-	<br/><br/>
 	<!-- form of donation -->
-	<!-- <section style="padding-top:1rem; padding-bottom:2rem;">
+	<section style="padding-top:1rem; padding-bottom:2rem;">
 		<div class="container-fluid">
 			<div style="margin:0 auto;">
 				<form action="/donations" method="GET"> 
@@ -107,7 +61,7 @@
 				</form>
 			</div>
 		</div>
-	</section> -->
+	</section>
 	
 	<div class="row">
 		<% if(donationNGO.length !== 0){ %>
@@ -132,41 +86,45 @@
 			</div>
 		<% } %>
 	</div>
+	
+	<% if(donationNGO.length !== 0){ %>
+		<section style="padding-top:0.5rem; padding-bottom:100px;" style="z-index:1;">
+			<div class="row text-center" style="display:flex; flex-wrap:wrap;">
+					<div class="col-md-3" style="overflow-y: auto; height:800px;">
+						<div id="accordion" class="thumbnail">
+							<% donationNGO.forEach(ngo => { %>
+								<div class="card">
+									<div class="card-header" id="headingOne">
+										<h5 class="mb-0" id="span1">
+											<button id="btn1" class="btn btn-link collapsed" data-toggle="collapse" data-target="#collapse<%= ngo._id %>" aria-expanded="false" aria-controls="collapse<%= ngo._id %>" style="text-decoration:none;">
+												<span id="span1" style="color:black;"><%=ngo.Name%></span>
+											</button>
+										</h5>
+									</div>
 
-	<section style="padding-top:0.5rem; padding-bottom:100px;">
-		<div class="row text-center" style="display:flex; flex-wrap:wrap;">
-				<div class="col-md-3" style="overflow-y: auto; height:800px;">
-					<div id="accordion" class="thumbnail">
-						<% donationNGO.forEach(ngo => { %>
-							<div class="card">
-								<div class="card-header" id="headingOne">
-									<h5 class="mb-0" id="span1">
-										<button id="btn1" class="btn btn-link collapsed" data-toggle="collapse" data-target="#collapse<%= ngo._id %>" aria-expanded="false" aria-controls="collapse<%= ngo._id %>" style="text-decoration:none;">
-											<span id="span1" style="color:black;"><%=ngo.Name%></span>
-										</button>
-									</h5>
-								</div>
-
-								<div id="collapse<%= ngo._id %>" class="collapse show" aria-labelledby="headingOne" data-parent="#accordion">
-									<div class="card-body">
-										<ul class="text-left">
-											<li><strong>Description: </strong><br/><%= ngo.What %></li>
-											<li><strong>Address: </strong><br/><%= ngo.Address %></li>
-											<li><strong>Phone: </strong><br/><%= ngo.Phone %></li>
-											<li><strong>Website: </strong><br/><a href="https://<%= ngo.Website %>" target="_blank"><%= ngo.Website %></a></li>
-											<li><strong>Public Holidays: </strong><br/><%= ngo.Public_holidays %></li>
-										</ul>
+									<div id="collapse<%= ngo._id %>" class="collapse show" aria-labelledby="headingOne" data-parent="#accordion">
+										<div class="card-body">
+											<ul class="text-left">
+												<li><strong>Description: </strong><br/><%= ngo.What %></li>
+												<li><strong>Address: </strong><br/><%= ngo.Address %></li>
+												<li><strong>Phone: </strong><br/><%= ngo.Phone %></li>
+												<li><strong>Website: </strong><br/><a href="https://<%= ngo.Website %>" target="_blank"><%= ngo.Website %></a></li>
+												<li><strong>Public Holidays: </strong><br/><%= ngo.Public_holidays %></li>
+											</ul>
+										</div>
 									</div>
 								</div>
-							</div>
-						<% }) %>
+							<% }) %>
+						</div>
 					</div>
-				</div>
-				<!-- 生成右边的 map -->
-				<div class="col-md-9" id="map" style="height:800px;">
-				</div>
-		</div>
-	</section>
+					<!-- 生成右边的 map -->
+					<div class="col-md-9" id="map" style="height:800px;">
+					</div>
+			</div>
+		</section>
+	<% } else { %>
+		<div style="height:0;"></div>
+	<% } %>
 
 	<script>
 		function initMap() {
