@@ -3,26 +3,16 @@
 	<header class="masthead volheader" id="volunteer-bg">
 		<div class="overlay" style="padding-top:20px;"></div>
 		<div class="container">
-			<div class="intro-text" style="padding-top:200px;">
-				<div class="intro-lead-in" style="font-size:70px;"><strong>Volunteer</strong>	
+			<div class="intro-text" style="padding-top:11rem;">
+				<div class="intro-lead-in" style="font-size:3.5rem; padding-bottom:2rem;">
+					<strong>Volunteer</strong>	
 				</div>
-				<br /><br />
-				<p class="intro-lead-in" style="color:white; font-size:30px; padding-left:80px; padding-right:80px;">Provide comfort and assistance to the people in distress</p>
+				<p class="intro-lead-in d-none d-sm-block" style="color:white; font-size:2.5rem;">
+					Provide comfort and assistance to the people in distress
+				</p>
 			</div>
 		</div>
 	</header>
-	<!-- <div class="section-intro offset" id="donation-header">
-		<div class="header-intro parallax100 t-center" id="volunteer-bg">
-			<span class="tit2 p-l-15 p-r-15" id="donation-title">
-				Volunteer
-			</span>
-			<h3 class="t-center p-l-15 p-r-15 p-t-3" style="font-size:150%; color:white;">
-				<span style="font-size:150%; color:orange;">Choose the category of homeless and your suburb to
-					<br/>get recomendations!</span>
-			</h3>
-		</div>
-	</div>
- -->
 
 	<!-- form of volunteer -->
 	<section style="padding-top:1.5rem; padding-bottom:2rem;">
@@ -33,7 +23,7 @@
 						<div class="row">
 							<div class="col-md-4">
 								<select class="form-control selectpicker show-tick show-menu-arrow" data-style="btn-warning" name="description" id="description" placeholder="Choose a type of homeless">
-									<option>Choose a category of homeless</option>
+									<option>Choose a category of homeless (Optional)</option>
 									<option value="children">Children</option>
 									<option value="adult">Adult</option>
 									<option value="old">Old</option>
@@ -248,7 +238,7 @@
 	<% if(volNGO.length !== 0){ %>
 		<section style="padding-top:0.5rem; padding-bottom:100px;">
 			<div class="row text-center" style="display:flex; flex-wrap:wrap;">
-					<div class="col-md-3" style="overflow-y: auto; height:800px;">
+					<div class="col-xs-0 col-md-3" style="overflow-y: auto; height:800px;">
 						<div id="accordion" class="thumbnail">
 							<% volNGO.forEach(ngo => { %>
 								<div class="card">
@@ -274,7 +264,7 @@
 						</div>
 					</div>
 					<!-- 生成右边的 map -->
-					<div class="col-md-9" id="map" style="height:800px;">
+					<div class="col-xs-12 col-md-9" id="map" style="height:800px;">
 					</div>
 			</div>
 		</section>

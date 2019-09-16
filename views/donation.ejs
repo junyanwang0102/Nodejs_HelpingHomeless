@@ -3,11 +3,13 @@
 	<header class="masthead donationheader" id="donation-bg">
 		<div class="overlay" style="padding-top:20px;"></div>
 		<div class="container">
-			<div class="intro-text" style="padding-top:200px;">
-				<div class="intro-lead-in" style="font-size:70px;"><strong>Donate</strong>	
+			<div class="intro-text" style="padding-top:11rem;">
+				<div class="intro-lead-in" style="font-size:3.5rem; padding-bottom:2rem;">
+					<strong>Donate</strong>	
 				</div>
-				<br /><br />
-				<p class="intro-lead-in" style="color:white; font-size:30px; padding-left:80px; padding-right:80px;">ITEMS RATHER THAN MONEY!</p>
+				<p class="intro-lead-in d-none d-sm-block" style="color:white; font-size:2.5rem;">
+					ITEMS MORE THAN MONEY!
+				</p>
 			</div>
 		</div>
 	</header>
@@ -90,7 +92,7 @@
 	<% if(donationNGO.length !== 0){ %>
 		<section style="padding-top:0.5rem; padding-bottom:100px;" style="z-index:1;">
 			<div class="row text-center" style="display:flex; flex-wrap:wrap;">
-					<div class="col-md-3" style="overflow-y: auto; height:800px;">
+					<div class="col-xs-0 col-md-3 d-none d-sm-block" style="overflow-y: auto; height:800px;">
 						<div id="accordion" class="thumbnail">
 							<% donationNGO.forEach(ngo => { %>
 								<div class="card">
@@ -102,13 +104,20 @@
 										</h5>
 									</div>
 
-									<div id="collapse<%= ngo._id %>" class="collapse show" aria-labelledby="headingOne" data-parent="#accordion">
+									<div id="collapse<%= ngo._id %>" class="collapse" aria-labelledby="headingOne" data-parent="#accordion">
 										<div class="card-body">
 											<ul class="text-left">
 												<li><strong>Description: </strong><br/><%= ngo.What %></li>
 												<li><strong>Address: </strong><br/><%= ngo.Address %></li>
 												<li><strong>Phone: </strong><br/><%= ngo.Phone %></li>
 												<li><strong>Website: </strong><br/><a style="color:red;" href="https://<%= ngo.Website %>" target="_blank"><%= ngo.Website %></a></li>
+												<li><strong>Monday: </strong><br/><%= ngo.Monday %></li>
+												<li><strong>Tuesday: </strong><br/><%= ngo.Tuesday %></li>
+												<li><strong>Wednesday: </strong><br/><%= ngo.Wednesday %></li>
+												<li><strong>Thursday: </strong><br/><%= ngo.Thursday %></li>
+												<li><strong>Friday: </strong><br/><%= ngo.Friday %></li>
+												<li><strong>Saturday: </strong><br/><%= ngo.Saturday %></li>
+												<li><strong>Sunday: </strong><br/><%= ngo.Sunday %></li>
 												<li><strong>Public Holidays: </strong><br/><%= ngo.Public_holidays %></li>
 											</ul>
 										</div>
@@ -118,7 +127,7 @@
 						</div>
 					</div>
 					<!-- 生成右边的 map -->
-					<div class="col-md-9" id="map" style="height:800px;">
+					<div class="col-xs-12 col-md-9" id="map" style="height:800px;">
 					</div>
 			</div>
 		</section>
