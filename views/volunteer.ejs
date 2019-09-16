@@ -7,7 +7,7 @@
 				<div class="intro-lead-in" style="font-size:70px;"><strong>Volunteer</strong>	
 				</div>
 				<br /><br />
-				<p class="intro-lead-in" style="color:white; font-size:30px; padding-left:80px; padding-right:80px;">Choose the category of homeless and your suburb to get recomendations</p>
+				<p class="intro-lead-in" style="color:white; font-size:30px; padding-left:80px; padding-right:80px;">Provide comfort and assistance to the people in distress</p>
 			</div>
 		</div>
 	</header>
@@ -314,7 +314,7 @@
 				marker.addListener('click', function() {
 					//marker.getPosition(this.position);
 					infowindow.close();
-					infowindow.setContent(`<div style="padding: 10px;"> <p class="text-left" style="color:red;"><%=name%></p><br /><p class="text-left"><%=address%></p><br /><p class="text-left">Number of volunteers:      <strong><%=volNum%></strong></p></div>`);
+					infowindow.setContent(`<div style="padding: 10px;"> <p class="text-left" style="color:red;"><strong><%=name%></strong></p><br /><p class="text-left"><%=address%></p><br /><p class="text-left">Number of volunteers:      <strong><%=volNum%></strong></p></div>`);
 					infowindow.open(map, marker);
 					infowindow.setPosition(this.position);
 					map.setZoom(15);
