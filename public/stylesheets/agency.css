@@ -1,7 +1,7 @@
 /* 后期修改的id样式 */
 
 #header-bg {
-	background-image: url(https://images.unsplash.com/photo-1461532257246-777de18cd58b?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1955&q=80);
+	background-image: url(https://images.unsplash.com/photo-1519430044529-9a9a57177865?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=2510&q=80);
 	background-size:cover;
 }
 #volunteer-bg {
@@ -54,16 +54,14 @@
 	font-size: 5rem;
 }
 
-#volunteer-title {
-	font-size: 2rem;
-}
 
 #news-title,
 #team-title,
 #donation-description,
 #volunteer-title{
-	font-family: 'Permanent Marker', cursive;
+	font-family: 'Segoe UI Symbol';
 	letter-spacing: 0.3rem;
+	font-size: 2rem;
 }
 
 .portfolio-hover .portfolio-hover-content .fa-book-reader {
@@ -382,8 +380,15 @@ header.volmasthead .intro-text {
 header.masthead .intro-text .intro-lead-in {
 	font-size: 22px;
 	font-style: italic;
-	line-height: 22px;
 	margin-bottom: 25px;
+	font-family: 'Droid Serif', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto,
+		'Helvetica Neue', Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji',
+		'Segoe UI Symbol', 'Noto Color Emoji';
+}
+.title-font {
+	font-size: 2.4rem;
+	margin-bottom:1rem;
+	font-style: italic;
 	font-family: 'Droid Serif', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto,
 		'Helvetica Neue', Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji',
 		'Segoe UI Symbol', 'Noto Color Emoji';

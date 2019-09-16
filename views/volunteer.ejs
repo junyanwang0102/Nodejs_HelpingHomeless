@@ -23,6 +23,7 @@
 		</div>
 	</div>
  -->
+
 	<!-- form of volunteer -->
 	<section style="padding-top:1.5rem; padding-bottom:2rem;">
 		<div class="container-fluid">
@@ -248,38 +249,42 @@
 		<% } %>
 	</div>
 
-	<section style="padding-top:0.5rem; padding-bottom:100px;">
-		<div class="row text-center" style="display:flex; flex-wrap:wrap;">
-				<div class="col-md-3" style="overflow-y: auto; height:800px;">
-					<div id="accordion" class="thumbnail">
-						<% volNGO.forEach(ngo => { %>
-							<div class="card">
-								<div class="card-header" id="headingOne">
-									<h5 class="mb-0">
-										<button class="btn btn-link collapsed" data-toggle="collapse" data-target="#collapse<%= ngo._id %>" aria-expanded="false" aria-controls="collapse<%= ngo._id %>" style="text-decoration:none;" >
-											<span style="color:black;"><%= ngo.name %></span>
-										</button>
-									</h5>
-								</div>
+	<% if(volNGO.length !== 0){ %>
+		<section style="padding-top:0.5rem; padding-bottom:100px;">
+			<div class="row text-center" style="display:flex; flex-wrap:wrap;">
+					<div class="col-md-3" style="overflow-y: auto; height:800px;">
+						<div id="accordion" class="thumbnail">
+							<% volNGO.forEach(ngo => { %>
+								<div class="card">
+									<div class="card-header" id="headingOne">
+										<h5 class="mb-0">
+											<button class="btn btn-link collapsed" data-toggle="collapse" data-target="#collapse<%= ngo._id %>" aria-expanded="false" aria-controls="collapse<%= ngo._id %>" style="text-decoration:none;" >
+												<span style="color:black;"><%= ngo.name %></span>
+											</button>
+										</h5>
+									</div>
 
-								<div id="collapse<%= ngo._id %>" class="collapse show" aria-labelledby="headingOne" data-parent="#accordion">
-									<div class="card-body">
-										<ul class="text-left">
-											<li><strong>Address: </strong><br/><%= ngo.address %></li>
-											<li><strong>Beneficiaries: </strong><br/><%= ngo.main_beneficiaries %></li>
-											<li><strong>No.Volunteers: </strong><br/><%= ngo.num_volunteers %></li>
-										</ul>
+									<div id="collapse<%= ngo._id %>" class="collapse show" aria-labelledby="headingOne" data-parent="#accordion">
+										<div class="card-body">
+											<ul class="text-left">
+												<li><strong>Address: </strong><br/><%= ngo.address %></li>
+												<li><strong>Beneficiaries: </strong><br/><%= ngo.main_beneficiaries %></li>
+												<li><strong>No.Volunteers: </strong><br/><%= ngo.num_volunteers %></li>
+											</ul>
+										</div>
 									</div>
 								</div>
-							</div>
-						<% }) %>
+							<% }) %>
+						</div>
 					</div>
-				</div>
-				<!-- 生成右边的 map -->
-				<div class="col-md-9" id="map" style="height:800px;">
-				</div>
-		</div>
-	</section>
+					<!-- 生成右边的 map -->
+					<div class="col-md-9" id="map" style="height:800px;">
+					</div>
+			</div>
+		</section>
+	<% } else { %>
+		<div style="height:0;"></div>
+	<% } %>
 
 	<script>
 		function initMap() {
