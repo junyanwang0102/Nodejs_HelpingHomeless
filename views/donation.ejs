@@ -1,23 +1,29 @@
 <% include partials/header %>
 	<!-- header of donation -->
 	<header class="masthead donationheader" id="donation-bg">
-		<div class="overlay" style="padding-top:20px;"></div>
+		<div class="overlay" style="padding-top:20px;">
+		</div>
 		<div class="container">
 			<div class="intro-text" style="padding-top:11rem;">
 				<div class="intro-lead-in" style="font-size:3.5rem; padding-bottom:2rem;">
-					<strong>Donate</strong>	
+					<strong>Donate</strong>
 				</div>
 				<p class="intro-lead-in d-none d-sm-block" style="color:white; font-size:2.5rem;">
-					ITEMS MORE THAN MONEY!
+					Items more than money !
 				</p>
 			</div>
 		</div>
 	</header>
+
+	<h4 class="text-center" style="margin-top:20px; color:red;">
+		Find the NGO near you and start donating!
+	</h4>
+
 	<!-- form of donation -->
-	<section style="padding-top:1rem; padding-bottom:2rem;">
+	<div style="padding-top:1rem; padding-bottom:2rem;">
 		<div class="container-fluid">
 			<div style="margin:0 auto;">
-				<form action="/donations" method="GET"> 
+				<form action="/donations" method="GET">
 					<div class="form-group">
 						<div class="row">
 							<div class="col-md-3">
@@ -63,147 +69,182 @@
 				</form>
 			</div>
 		</div>
-	</section>
-	
+	</div>
+
 	<div class="row">
 		<% if(donationNGO.length !== 0){ %>
 			<div class="col-md-4">
 			</div>
 			<div class="col-md-4">
 				<h3 class="t-center" style="font-size:150%; color:red;">
-					<span><%= donationNGO.length %> NGOs in <%= donationNGO[0].Suburb %>.</span>
+					<span>
+						<%= donationNGO.length %> NGOs in
+							<%= donationNGO[0].Suburb %>.</span>
 				</h3>
 			</div>
 			<div class="col-md-4">
 			</div>
-		<% } else { %>
-			<div class="col-md-4">
-			</div>
-			<div class="col-md-4">
-				<h3 class="t-center p-t-3" style="font-size:150%; color:red;">
-					<span>Make The Selction <br /> Get Recommendations!</span>
-				</h3>
-			</div>
-			<div class="col-md-4">
-			</div>
-		<% } %>
+			<% } else { %>
+				<!-- <div class="col-md-4">
+				</div>
+				<div class="col-md-4">
+					<h3 class="t-center p-t-3" style="font-size:150%; color:red;">
+						<span>Make The Selction <br /> Get Recommendations!</span>
+					</h3>
+				</div>
+				<div class="col-md-4">
+				</div> -->
+				<% } %>
 	</div>
-	
-	<% if(donationNGO.length !== 0){ %>
-		<section style="padding-top:0.5rem; padding-bottom:100px;" style="z-index:1;">
-			<div class="row text-center" style="display:flex; flex-wrap:wrap;">
-					<div class="col-xs-0 col-md-3 d-none d-sm-block" style="overflow-y: auto; height:800px;">
-						<div id="accordion" class="thumbnail">
-							<% donationNGO.forEach(ngo => { %>
-								<div class="card">
-									<div class="card-header" id="headingOne">
-										<h5 class="mb-0" id="span1">
-											<button id="btn1" class="btn btn-link collapsed" data-toggle="collapse" data-target="#collapse<%= ngo._id %>" aria-expanded="false" aria-controls="collapse<%= ngo._id %>" style="text-decoration:none;">
-												<span id="span1" style="color:black;"><%=ngo.Name%></span>
-											</button>
-										</h5>
-									</div>
 
-									<div id="collapse<%= ngo._id %>" class="collapse" aria-labelledby="headingOne" data-parent="#accordion">
-										<div class="card-body">
-											<ul class="text-left">
-												<li><strong>Description: </strong><br/><%= ngo.What %></li>
-												<li><strong>Address: </strong><br/><%= ngo.Address %></li>
-												<li><strong>Phone: </strong><br/><%= ngo.Phone %></li>
-												<li><strong>Website: </strong><br/><a style="color:red;" href="https://<%= ngo.Website %>" target="_blank"><%= ngo.Website %></a></li>
-												<li><strong>Monday: </strong><br/><%= ngo.Monday %></li>
-												<li><strong>Tuesday: </strong><br/><%= ngo.Tuesday %></li>
-												<li><strong>Wednesday: </strong><br/><%= ngo.Wednesday %></li>
-												<li><strong>Thursday: </strong><br/><%= ngo.Thursday %></li>
-												<li><strong>Friday: </strong><br/><%= ngo.Friday %></li>
-												<li><strong>Saturday: </strong><br/><%= ngo.Saturday %></li>
-												<li><strong>Sunday: </strong><br/><%= ngo.Sunday %></li>
-												<li><strong>Public Holidays: </strong><br/><%= ngo.Public_holidays %></li>
-											</ul>
-										</div>
+	<% if(donationNGO.length !== 0){ %>
+		<section style="padding-top:0.5rem; padding-bottom:100px;" style="position:relative;">
+			<div class="row text-center" style="display:flex; flex-wrap:wrap;">
+				<div class="col-xs-0 col-md-3 d-none d-sm-block" style="overflow-y: auto; height:800px;">
+					<div id="accordion" class="thumbnail">
+						<% donationNGO.forEach(ngo => { %>
+							<div class="card">
+								<div class="card-header" id="headingOne">
+									<h5 class="mb-0" id="span1">
+										<button id="btn1" class="btn btn-link collapsed" data-toggle="collapse" data-target="#collapse<%= ngo._id %>" aria-expanded="false" aria-controls="collapse<%= ngo._id %>" style="text-decoration:none;">
+											<span id="span1" style="color:black;">
+												<%=ngo.Name%>
+											</span>
+										</button>
+									</h5>
+								</div>
+
+								<div id="collapse<%= ngo._id %>" class="collapse" aria-labelledby="headingOne" data-parent="#accordion">
+									<div class="card-body">
+										<ul class="text-left">
+											<li>
+												<strong>Description: </strong>
+												<br/>
+												<%= ngo.What %>
+											</li>
+											<li>
+												<strong>Address: </strong>
+												<br/>
+												<%= ngo.Address %>
+											</li>
+											<li>
+												<strong>Phone: </strong>
+												<br/>
+												<%= ngo.Phone %>
+											</li>
+											<li>
+												<strong>Website: </strong>
+												<br/>
+												<a style="color:red;" href="https://<%= ngo.Website %>" target="_blank">
+													<%= ngo.Website %>
+												</a>
+											</li>
+											<li>
+												<strong>Monday: </strong>
+												<br/>
+												<%= ngo.Monday %>
+											</li>
+											<li>
+												<strong>Tuesday: </strong>
+												<br/>
+												<%= ngo.Tuesday %>
+											</li>
+											<li>
+												<strong>Wednesday: </strong>
+												<br/>
+												<%= ngo.Wednesday %>
+											</li>
+											<li>
+												<strong>Thursday: </strong>
+												<br/>
+												<%= ngo.Thursday %>
+											</li>
+											<li>
+												<strong>Friday: </strong>
+												<br/>
+												<%= ngo.Friday %>
+											</li>
+											<li>
+												<strong>Saturday: </strong>
+												<br/>
+												<%= ngo.Saturday %>
+											</li>
+											<li>
+												<strong>Sunday: </strong>
+												<br/>
+												<%= ngo.Sunday %>
+											</li>
+											<li>
+												<strong>Public Holidays: </strong>
+												<br/>
+												<%= ngo.Public_holidays %>
+											</li>
+										</ul>
 									</div>
 								</div>
+							</div>
 							<% }) %>
-						</div>
 					</div>
-					<!-- 生成右边的 map -->
-					<div class="col-xs-12 col-md-9" id="map" style="height:800px;">
-					</div>
+				</div>
+				<!-- 生成右边的 map -->
+				<div class="col-xs-12 col-md-9" id="map" style="height:800px;">
+				</div>
 			</div>
 		</section>
-	<% } else { %>
-		<div style="height:0;"></div>
-	<% } %>
-
-	<script>
-		function initMap() {
-			var infowindow = new google.maps.InfoWindow();
-			<% donationNGO.forEach( ngo => { %>
-				var latitude = <%= ngo.Latitude %>;
-				var longitude = <%= ngo.Longitude %>;
-				var center = {
-					lat: latitude,
-					lng: longitude
-				};
-				var map = new google.maps.Map(document.getElementById('map'), {
-					zoom: 15,
-					center: center,
-					gestureHandling: 'cooperative'
-				});
-			<% }) %>
-			
-			<% function placeMarker(ngo) { %>
-				<% var lat = ngo.Latitude; %>
-				<% var lng = ngo.Longitude; %>
-				<% var name = ngo.Name; %>
-				<% var address = ngo.Address; %>
-				<% var phone = ngo.Phone; %>
-				<% var website = ngo.Website; %>
-				<% var public_holidays = ngo.Public_holidays; %>
-				var latLng = new google.maps.LatLng(<%=lat%>, <%=lng%>);
-				var marker = new google.maps.Marker({ 
-					position: latLng,
-					map: map,
-					animation: google.maps.Animation.DROP
-				});
-				marker.addListener('click', function() {
-					//marker.getPosition(this.position);
-					infowindow.close();
-					infowindow.setContent(`<div style="padding: 10px;"><p class="text-left" style="color:red;"><strong><%=name%></strong></p><br /><p class="text-left"><%=address%></p><br /><p class="text-left">Phone: <strong><%=phone%></strong></p><br /><p class="text-left">Website: <a href="https://<%=website%>" target="_blank"><strong style="color:green;"><%= website %></strong></a></p><br /><p class="text-left">Public Holidays: <strong><%=public_holidays%></strong></p></div>`);
-					infowindow.open(map, marker);
-					infowindow.setPosition(this.position);
-					//map.setZoom(15);
-					// if (marker.getAnimation() !== null) {
-					// 	marker.setAnimation(null);
-					// } else {
-					// 	marker.setAnimation(google.maps.Animation.BOUNCE);
-					// }
-			  	});
+		<% } else { %>
+			<div style="height:0;"></div>
 			<% } %>
-									   
-			<% for (var i = 0; i < donationNGO.length; i++) { %>
-				<% placeMarker(donationNGO[i]); %>
-			<% } %>
-			
-		}
-		
-		
-		google.maps.event.addDomListener(window, 'load', initMap);
 
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-	</script>
-	<script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDEmNNZ8gW73CShJzZLosV-kb3_JYtFua0&callback=initMap"></script>
+				<script>
+					function initMap() {
+						var infowindow = new google.maps.InfoWindow();
+						<% donationNGO.forEach( ngo => { %>
+						var latitude = <%= ngo.Latitude %>;
+						var longitude = <%= ngo.Longitude %>;
+						var center = {
+							lat: latitude,
+							lng: longitude
+						};
+						var map = new google.maps.Map(document.getElementById('map'), {
+							zoom: 15,
+							center: center,
+							gestureHandling: 'cooperative'
+						});
+						<% }) %>
+						<% function placeMarker(ngo) { %>
+						<% var lat = ngo.Latitude; %>
+						<% var lng = ngo.Longitude; %>
+						<% var name = ngo.Name; %>
+						<% var address = ngo.Address; %>
+						<% var phone = ngo.Phone; %>
+						<% var website = ngo.Website; %>
+						<% var public_holidays = ngo.Public_holidays; %>
+						var latLng = new google.maps.LatLng(<%=lat%>, <%=lng%>);
+						var marker = new google.maps.Marker({
+							position: latLng,
+							map: map,
+							animation: google.maps.Animation.DROP
+						});
+						marker.addListener('click', function() {
+							//marker.getPosition(this.position);
+							infowindow.close();
+							infowindow.setContent(`<div style="padding: 10px;"><p class="text-left" style="color:red;"><strong><%=name%></strong></p><br /><p class="text-left"><%=address%></p><br /><p class="text-left">Phone: <strong><%=phone%></strong></p><br /><p class="text-left">Website: <a href="https://<%=website%>" target="_blank"><strong style="color:green;"><%= website %></strong></a></p><br /><p class="text-left">Public Holidays: <strong><%=public_holidays%></strong></p></div>`);
+							infowindow.open(map, marker);
+							infowindow.setPosition(this.position);
+							//map.setZoom(15);
+							// if (marker.getAnimation() !== null) {
+							// 	marker.setAnimation(null);
+							// } else {
+							// 	marker.setAnimation(google.maps.Animation.BOUNCE);
+							// }
+						});
+						<% } %>
+						<% for (var i = 0; i < donationNGO.length; i++) { %>
+						<% placeMarker(donationNGO[i]); %>
+						<% } %>
+					}
+					google.maps.event.addDomListener(window, 'load', initMap);
+				</script>
+				<script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDEmNNZ8gW73CShJzZLosV-kb3_JYtFua0&callback=initMap"></script>
 
-
-	<% include partials/footer %>
+				<% include partials/footer %>
