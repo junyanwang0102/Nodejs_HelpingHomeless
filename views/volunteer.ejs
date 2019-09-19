@@ -13,21 +13,25 @@
 			</div>
 		</div>
 	</header>
-	
-	<h4 class="text-center" style="margin-top:20px; color:red; line-height:2.5rem;">
-		There are kids, adults, old people and families out there who require your assistance.<br/>
-		Find the NGO near you and start volunteering!
-	</h4>
 
 	<!-- form of volunteer -->
-	<section style="padding-top:1.5rem; padding-bottom:2rem;">
+	<section style="padding-top:0.5rem; padding-bottom:2rem;">
 		<div class="container-fluid">
 			<div style="margin:0 auto;">
 				<form action="/volunteers" method="GET"> 
 					<div class="form-group">
 						<div class="row">
+							<h6 class="text-left col-md-4" style="margin-top:20px; color:red; line-height:2.5rem;">
+								Select the category of homeless people:
+							</h6>
+							<h6 class="text-left col-md-4" style="margin-top:20px; color:red; line-height:2.5rem;">
+								Select or search a suburb:
+							</h6>
+							<div class="col-md-4"></div>
+						</div>
+						<div class="row">
 							<div class="col-md-4">
-								<select class="form-control selectpicker show-tick show-menu-arrow" data-style="btn-warning" name="description" id="description" placeholder="Choose a type of homeless">
+								<select id="description" class="form-control selectpicker dropdown show-tick show-menu-arrow auto-save" data-style="btn-warning" name="description" placeholder="Choose a category of homeless">
 									<option>Choose a category of homeless (Optional)</option>
 									<option value="children">Children</option>
 									<option value="adult">Adult</option>
@@ -37,8 +41,8 @@
 							</div>
 							
 							<div class="col-md-4">
-								<select class="form-control selectpicker dropdown show-tick show-menu-arrow" data-live-search="true" data-size="6" data-style="btn-warning" name="location" id="location" placeholder="Select or search your suburb">
-									<option>Select or search your suburb</option>
+								<select class="form-control selectpicker dropdown show-tick show-menu-arrow auto-save" data-live-search="true" data-size="6" data-style="btn-warning" name="location" id="vol-location" placeholder="Select or search your suburb">
+									<option>--</option>
 									<option value="melbourne">Melbourne, 3100</option>
 									<option value="kew">Kew</option>
 									<option value="box hill">Box Hill</option>
@@ -205,7 +209,7 @@
 							</div>
 						
 							<div class="col-md-4">
-								<input type="submit" value="Search" class="btn btn-outline-danger btn-lg btn-block" style="line-height:50%;">
+								<input id="vol-sub" type="submit" value="Search" class="btn btn-outline-danger btn-lg btn-block" style="line-height:50%;">
 							</div>
 						</div>
 					</div>
@@ -317,23 +321,14 @@
 			
 		}
 		google.maps.event.addDomListener(window, 'load', initMap);
-		
-		
-
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
 	</script>
-	<script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDEmNNZ8gW73CShJzZLosV-kb3_JYtFua0&callback=initMap"></script>
 
+	<script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDEmNNZ8gW73CShJzZLosV-kb3_JYtFua0&callback=initMap"></script>
+	<script src="/stylesheets/jquery.min.js"></script>
+	<script src="/stylesheets/savy.min.js"></script>
+
+	<script>
+		$('.auto-save').savy('load');
+	</script>
 
 	<% include partials/footer %>
