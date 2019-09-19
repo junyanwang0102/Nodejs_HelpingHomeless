@@ -31,32 +31,31 @@
 							<div class="col-md-3">
 								<select class="form-control selectpicker dropdown show-tick show-menu-arrow auto-save" data-live-search="true" data-size="6" data-style="btn-warning" name="location" id="donatelocation" placeholder="Select or search your suburb">
 									<option>Select or search your suburb</option>
-									<option value="Melbourne">Melbourne</option>
-									<option value="Fitzroy">Fitzroy</option>
-									<option value="Collingwood">Collingwood</option>
-									<option value="North Melbourne">North Melbourne</option>
-									<option value="Kensington">Kensington</option>
-									<option value="Carlton North">Carlton North</option>
-									<option value="St Kilda">St Kilda</option>
-									<option value="West Melbourne">West Melbourne</option>
-									<option value="north melbourne">North Melbourne</option>
-									<option value="Carlton">Carlton</option>
-									<option value="East Melbourne">East Melbourne</option>
-									<option value="South Melbourne">South Melbourne</option>
-									<option value="Richmond">Richmond</option>
-									<option value="Flemington">Flemington</option>
-									<option value="Parkville">Parkville</option>
-									<option value="Footscray">Footscray</option>
-									<option value="Box Hill">Box Hill</option>
-									<option value="Preston">Preston</option>
-									<option value="Caulfield South">Caulfield South</option>
-									<option value="Albert Park">Albert Park</option>
-									<option value="Dandenong">Dandenong</option>
-									<option value="Moonee Ponds">Moonee Ponds</option>
-									<option value="Abbotsford">Abbotsford</option>
-									<option value="North Fitzroy">North Fitzroy</option>
-									<option value="Northcote">Northcote</option>
-									<option value="Glenroy">Glenroy</option>
+									<option value="Melbourne">Melbourne, 3000</option>
+									<option value="Fitzroy">Fitzroy, 3065</option>
+									<option value="Collingwood">Collingwood, 3066</option>
+									<option value="Kensington">Kensington, 3031</option>
+									<option value="Carlton North">Carlton North, 3054</option>
+									<option value="St Kilda">St Kilda, 3182</option>
+									<option value="West Melbourne">West Melbourne, 3003</option>
+									<option value="north melbourne">North Melbourne, 3051</option>
+									<option value="Carlton">Carlton, 3053</option>
+									<option value="East Melbourne">East Melbourne, 3002</option>
+									<option value="South Melbourne">South Melbourne, 3205</option>
+									<option value="Richmond">Richmond, 3121</option>
+									<option value="Flemington">Flemington, 3031</option>
+									<option value="Parkville">Parkville, 3052</option>
+									<option value="Footscray">Footscray, 3011</option>
+									<option value="Box Hill">Box Hill, 3128</option>
+									<option value="Preston">Preston, 3072</option>
+									<option value="Caulfield South">Caulfield South, 3162</option>
+									<option value="Albert Park">Albert Park, 3206</option>
+									<option value="Dandenong">Dandenong, 3175</option>
+									<option value="Moonee Ponds">Moonee Ponds, 3039</option>
+									<option value="Abbotsford">Abbotsford, 3067</option>
+									<option value="North Fitzroy">North Fitzroy, 3068</option>
+									<option value="Northcote">Northcote, 3070</option>
+									<option value="Glenroy">Glenroy, 3046</option>
 								</select>
 							</div>
 							<div class="col-md-3">
@@ -77,7 +76,7 @@
 			</div>
 			<div class="col-md-4">
 				<h3 class="t-center" style="font-size:150%; color:red;">
-					<span><%= donationNGO.length %> NGOs in <%= donationNGO[0].Suburb %>.</span>
+					<span><%= donationNGO.length %> NGOs founded.</span>
 				</h3>
 			</div>
 			<div class="col-md-4">
@@ -85,6 +84,7 @@
 		<% } else { %>
 		<% } %>
 	</div>
+
 
 	<% if(donationNGO.length !== 0){ %>
 		<section style="padding-top:0.5rem; padding-bottom:100px;" style="position:relative;">
@@ -237,6 +237,10 @@
 
 	<script>
 		$('.auto-save').savy('load');
+		
+		function clean_donate(){
+			localStorage.clear();
+		}
 	</script>
 
 <% include partials/footer %>

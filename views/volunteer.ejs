@@ -13,6 +13,10 @@
 			</div>
 		</div>
 	</header>
+	
+	<h4 class="text-center" style="margin-top:20px; color:red; line-height:2.5rem;">
+		Tell user how!
+	</h4>
 
 	<!-- form of volunteer -->
 	<section style="padding-top:0.5rem; padding-bottom:2rem;">
@@ -20,15 +24,6 @@
 			<div style="margin:0 auto;">
 				<form action="/volunteers" method="GET"> 
 					<div class="form-group">
-						<div class="row">
-							<h6 class="text-left col-md-4" style="margin-top:20px; color:red; line-height:2.5rem;">
-								Select the category of homeless people:
-							</h6>
-							<h6 class="text-left col-md-4" style="margin-top:20px; color:red; line-height:2.5rem;">
-								Select or search a suburb:
-							</h6>
-							<div class="col-md-4"></div>
-						</div>
 						<div class="row">
 							<div class="col-md-4">
 								<select id="description" class="form-control selectpicker dropdown show-tick show-menu-arrow auto-save" data-style="btn-warning" name="description" placeholder="Choose a category of homeless">
@@ -42,169 +37,165 @@
 							
 							<div class="col-md-4">
 								<select class="form-control selectpicker dropdown show-tick show-menu-arrow auto-save" data-live-search="true" data-size="6" data-style="btn-warning" name="location" id="vol-location" placeholder="Select or search your suburb">
-									<option>--</option>
-									<option value="melbourne">Melbourne, 3100</option>
-									<option value="kew">Kew</option>
-									<option value="box hill">Box Hill</option>
-									<option value="richmond">Richmond</option>
-									<option value="dandenong">Dandenong</option>
-									<option value="malvern">Malvern</option>
-									<option value="heidelberg">Heidelberg</option>
-									<option value="canterbury">Canterbury</option>
-									<option value="north melbourne">North Melbourne</option>
-									<option value="st kilda">St Kilda</option>
-									<option value="ascot vale">Ascot Vale</option>
-									<option value="mulgrave">Mulgrave</option>
-									<option value="macleod">Macleod</option>
-									<option value="craigieburn">Craigieburn</option>
-									<option value="rowville">Rowville</option>
-									<option value="clayton south">Clayton South</option>
-									<option value="balwyn">Balwyn</option>
-									<option value="fairfield">Fairfield</option>
-									<option value="albert park">Albert Park</option>
-									<option value="blackburn">Blackburn</option>
-									<option value="ashburton">Ashburton</option>
-									<option value="hawthorn">Hawthorn</option>
-									<option value="caulfield north">Caulfield North</option>
-									<option value="caulfield south">Caulfield South</option>
-									<option value="parkville">Parkville</option>
-									<option value="keysborough">Keysborough</option>
-									<option value="toorak">Toorak</option>
-									<option value="hawthorn east">Hawthorn East</option>
-									<option value="bentleigh">Bentleigh</option>
-									<option value="moorabbin">Moorabbin</option>
-									<option value="thornbury">Thornbury</option>
-									<option value="epping">Epping</option>
-									<option value="doveton">Doveton</option>
-									<option value="wyndham vale">Wyndham Vale</option>
-									<option value="west footscray">West Footscray</option>
-									<option value="burwood">Burwood</option>
-									<option value="sunshine">Sunshine</option>
-									<option value="wantirna south">Wantirna South</option>
-									<option value="bayswater">Bayswater</option>
-									<option value="werribee">Werribee</option>
-									<option value="lilydale">Lilydale</option>
-									<option value="ormond">Ormond</option>
-									<option value="elsternwick">Elsternwick</option>
-									<option value="carlton">Carlton</option>
-									<option value="caroline springs">Caroline Springs</option>
-									<option value="niddrie">Niddrie</option>
-									<option value="glen iris">Glen Iris</option>
-									<option value="tarneit">Tarneit</option>
-									<option value="st kilda east">St Kilda East</option>
-									<option value="st albans">St Albans</option>
-									<option value="dallas">Dallas</option>
-									<option value="south melbourne">South Melbourne</option>
-									<option value="bentleigh east">Bentleigh East</option>
-									<option value="preston">Preston</option>
-									<option value="braeside">Braeside</option>
-									<option value="frankston">Frankston</option>
-									<option value="broadmeadows">Broadmeadows</option>
-									<option value="ferntree gully">Ferntree gully</option>
-									<option value="briar hill">Briar Hill</option>
-									<option value="collingwood">Collingwood</option>
-									<option value="noble park">Noble Park</option>
-									<option value="ringwood north">Ringwood North</option>
-									<option value="croydon">Croydon</option>
-									<option value="mill park">Mill Park</option>
-									<option value="deer park">Deer Park</option>
-									<option value="glen waverley">Glen Waverley</option>
-									<option value="watsonia">Watsonia</option>
-									<option value="blackburn south">Blackburn South</option>
-									<option value="east brunswick">East Brunswick</option>
-									<option value="eltham">Eltham</option>
-									<option value="ringwood east">Ringwood East</option>
-									<option value="deepdene">Deepdene</option>
-									<option value="essendon">Essendon</option>
-									<option value="mount waverley">Mount Waverley</option>
-									<option value="doncaster east">Doncaster east</option>
-									<option value="mentone">Mentone</option>
-									<option value="wantirna">Wantirna</option>
-									<option value="carlton north">Carlton North</option>
-									<option value="surrey hills">Surrey Hills</option>
-									<option value="east st kilda">East St Kilda</option>
-									<option value="moonee ponds">Moonee Ponds</option>
-									<option value="northcote">Northcote</option>
-									<option value="fitzroy">Fitzroy</option>
-									<option value="boronia">Boronia</option>
-									<option value="abbotsford">Abbotsford</option>
-									<option value="camberwell">Camberwell</option>
-									<option value="braybrook">Braybrook</option>
-									<option value="windsor">Windsor</option>
-									<option value="flemington">Flemington</option>
-									<option value="malvern east">Malvern East</option>
-									<option value="keilor downs">Keilor Downs</option>
-									<option value="meadow heights">Meadow Heights</option>
-									<option value="truganina">Truganina</option>
-									<option value="diamond creek">Diamond Creek</option>
-									<option value="greenvale">Greenvale</option>
-									<option value="clayton">Clayton</option>
-									<option value="ringwood">Ringwood</option>
-									<option value="reservoir">Reservoir</option>
-									<option value="footscray">Footscray</option>
-									<option value="brunswick">Brunswick</option>
-									<option value="cheltenham">Cheltenham</option>
-									<option value="greensborough">Greensborough</option>
-									<option value="lysterfield">Lysterfield</option>
-									<option value="oakleigh">Oakleigh</option>
-									<option value="armadale">Armadale</option>
-									<option value="point cook">Point Cook</option>
-									<option value="thomastown">Thomastown</option>
-									<option value="balaclava">Balaclava</option>
-									<option value="croydon hills">Croydon Hills</option>
-									<option value="sandringham">Sandringham</option>
-									<option value="forest hill">Forest Hill</option>
-									<option value="st. kilda">St. Kilda</option>
-									<option value="lalor">Lalor</option>
-									<option value="carrum downs">Carrum Downs</option>
-									<option value="donvale">Donvale</option>
-									<option value="hoppers crossing">Hoppers Crossing</option>
-									<option value="mickleham">Mickleham</option>
-									<option value="east brighton">East Brighton</option>
-									<option value="bonbeach">Bonbeach</option>
-									<option value="studfield">Studfield</option>
-									<option value="black rock">Black Rock</option>
-									<option value="brighton">Brighton</option>
-									<option value="springvale">Springvale</option>
-									<option value="aspendale gardens">Aspendale Gardens</option>
-									<option value="mordialloc">Mordialloc</option>
-									<option value="yarraville">Yarraville</option>
-									<option value="mitcham">Mitcham</option>
-									<option value="upwey">Upwey</option>
-									<option value="dandenong north">Dandenong North</option>
-									<option value="altona">Altona</option>
-									<option value="seaford">Seaford</option>
-									<option value="port melbourne">Port Melbourne</option>
-									<option value="burwood east">Burwood East</option>
-									<option value="gladstone park">Gladstone Park</option>
-									<option value="caulfield">Caulfield</option>
-									<option value="scoresby">Scoresby</option>
-									<option value="heidelberg west">Heidelberg West</option>
-									<option value="bayswater north">Bayswater North</option>
-									<option value="kilsyth south">Kilsyth South</option>
-									<option value="belgrave heights">Belgrave Heights</option>
-									<option value="watsonia north">Watsonia North</option>
-									<option value="clarinda">Clarinda</option>
-									<option value="coburg">Coburg</option>
-									<option value="kew east">Kew East</option>
-									<option value="fitzroy north">Fitzroy North</option>
-									<option value="carnegie">Carnegie</option>
-									<option value="bulleen">Bulleen</option>
-									<option value="tullamarine">Tullamarine</option>
-									<option value="bundoora">Bundoora</option>
-									<option value="alphington">Alphington</option>
-									<option value="balwyn north">Balwyn North</option>
-									<option value="brunswick west">Brunswick West</option>
-									<option value="hampton">Hampton</option>
-									<option value="maidstone">Maidstone</option>
-									<option value="seabrook">Seabrook</option>
-									<option value="carlton south">Carlton South</option>
-									<option value="maribyrnong">Maribyrnong</option>
-									<option value="mt waverley">Mt Waverley</option>
-									<option value="brunswick north">Brunswick North</option>
-									<option value="south yarra">South Yarra</option>
-									<option value="ivanhoe">Ivanhoe</option>
-									<option value="frankston south">Frankston South</option>
+									<option>Select or search a suburb</option>
+									<option value="melbourne">Melbourne, 3000</option>
+									<option value="kew">Kew, 3101</option>
+									<option value="box hill">Box Hill, 3128</option>
+									<option value="richmond">Richmond, 3121</option>
+									<option value="dandenong">Dandenong, 3175</option>
+									<option value="malvern">Malvern, 3144</option>
+									<option value="heidelberg">Heidelberg, 3084</option>
+									<option value="canterbury">Canterbury, 3126</option>
+									<option value="north melbourne">North Melbourne, 3051</option>
+									<option value="st kilda">St Kilda, 3182</option>
+									<option value="ascot vale">Ascot Vale, 3032</option>
+									<option value="mulgrave">Mulgrave, 3170</option>
+									<option value="macleod">Macleod, 3085</option>
+									<option value="craigieburn">Craigieburn, 3064</option>
+									<option value="rowville">Rowville, 3178</option>
+									<option value="clayton south">Clayton South, 3169</option>
+									<option value="balwyn">Balwyn, 3103</option>
+									<option value="fairfield">Fairfield, 3078</option>
+									<option value="albert park">Albert Park, 3206</option>
+									<option value="blackburn">Blackburn, 3130</option>
+									<option value="ashburton">Ashburton, 3147</option>
+									<option value="hawthorn">Hawthorn, 3122</option>
+									<option value="caulfield north">Caulfield North, 3161</option>
+									<option value="caulfield south">Caulfield South, 3162</option>
+									<option value="parkville">Parkville, 3052</option>
+									<option value="keysborough">Keysborough, 3173</option>
+									<option value="toorak">Toorak, 3142</option>
+									<option value="hawthorn east">Hawthorn East, 3123</option>
+									<option value="bentleigh">Bentleigh, 3204</option>
+									<option value="moorabbin">Moorabbin, 3189</option>
+									<option value="thornbury">Thornbury, 3071</option>
+									<option value="epping">Epping, 3076</option>
+									<option value="doveton">Doveton, 3177</option>
+									<option value="wyndham vale">Wyndham Vale, 3024</option>
+									<option value="west footscray">West Footscray, 3012</option>
+									<option value="burwood">Burwood, 3125</option>
+									<option value="sunshine">Sunshine, 3020</option>
+									<option value="wantirna south">Wantirna South, 3152</option>
+									<option value="bayswater">Bayswater, 3153</option>
+									<option value="werribee">Werribee, 3030</option>
+									<option value="lilydale">Lilydale, 3140</option>
+									<option value="ormond">Ormond, 3204</option>
+									<option value="elsternwick">Elsternwick, 3185</option>
+									<option value="carlton">Carlton, 3053</option>
+									<option value="caroline springs">Caroline Springs, 3023</option>
+									<option value="niddrie">Niddrie, 3042</option>
+									<option value="glen iris">Glen Iris, 3146</option>
+									<option value="tarneit">Tarneit, 3029</option>
+									<option value="st kilda east">St Kilda East, 3183</option>
+									<option value="st albans">St Albans, 3021</option>
+									<option value="dallas">Dallas, 3047</option>
+									<option value="south melbourne">South Melbourne, 3205</option>
+									<option value="bentleigh east">Bentleigh East, 3165</option>
+									<option value="preston">Preston, 3072</option>
+									<option value="braeside">Braeside, 3195</option>
+									<option value="frankston">Frankston, 3199</option>
+									<option value="broadmeadows">Broadmeadows, 3047</option>
+									<option value="ferntree gully">Ferntree Gully, 3156</option>
+									<option value="briar hill">Briar Hill, 3088</option>
+									<option value="collingwood">Collingwood, 3066</option>
+									<option value="noble park">Noble Park, 3174</option>
+									<option value="ringwood north">Ringwood North, 3134</option>
+									<option value="croydon">Croydon, 3136</option>
+									<option value="mill park">Mill Park, 3082</option>
+									<option value="deer park">Deer Park, 3023</option>
+									<option value="glen waverley">Glen Waverley, 3150</option>
+									<option value="watsonia">Watsonia, 3087</option>
+									<option value="blackburn south">Blackburn South, 3130</option>
+									<option value="east brunswick">East Brunswick, 3057</option>
+									<option value="eltham">Eltham, 3095</option>
+									<option value="ringwood east">Ringwood East, 3135</option>
+									<option value="deepdene">Deepdene, 3103</option>
+									<option value="essendon">Essendon, 3040</option>
+									<option value="mount waverley">Mount Waverley, 3149</option>
+									<option value="doncaster east">Doncaster East, 3109</option>
+									<option value="mentone">Mentone, 3194</option>
+									<option value="wantirna">Wantirna, 3152</option>
+									<option value="carlton north">Carlton North, 3054</option>
+									<option value="surrey hills">Surrey Hills, 3127</option>
+									<option value="east st kilda">East St Kilda, 3183</option>
+									<option value="moonee ponds">Moonee Ponds, 3039</option>
+									<option value="northcote">Northcote, 3070</option>
+									<option value="fitzroy">Fitzroy, 3065</option>
+									<option value="boronia">Boronia, 3155</option>
+									<option value="abbotsford">Abbotsford, 3067</option>
+									<option value="camberwell">Camberwell, 3124</option>
+									<option value="braybrook">Braybrook, 3019</option>
+									<option value="windsor">Windsor, 3181</option>
+									<option value="flemington">Flemington, 3031</option>
+									<option value="malvern east">Malvern East, 3145</option>
+									<option value="keilor downs">Keilor Downs, 3038</option>
+									<option value="meadow heights">Meadow Heights, 3048</option>
+									<option value="truganina">Truganina, 3029</option>
+									<option value="diamond creek">Diamond Creek, 3089</option>
+									<option value="greenvale">Greenvale, 3059</option>
+									<option value="clayton">Clayton, 3168</option>
+									<option value="ringwood">Ringwood, 3134</option>
+									<option value="reservoir">Reservoir, 3073</option>
+									<option value="footscray">Footscray, 3011</option>
+									<option value="brunswick">Brunswick, 3056</option>
+									<option value="cheltenham">Cheltenham, 3192</option>
+									<option value="greensborough">Greensborough, 3088</option>
+									<option value="lysterfield">Lysterfield, 3156</option>
+									<option value="oakleigh">Oakleigh, 3166</option>
+									<option value="armadale">Armadale, 3143</option>
+									<option value="point cook">Point Cook, 3030</option>
+									<option value="thomastown">Thomastown, 3074</option>
+									<option value="balaclava">Balaclava, 3183</option>
+									<option value="croydon hills">Croydon Hills, 3136</option>
+									<option value="sandringham">Sandringham, 3191</option>
+									<option value="forest hill">Forest Hill, 3131</option>
+									<option value="st. kilda">St. Kilda, 3182</option>
+									<option value="lalor">Lalor, 3075</option>
+									<option value="carrum downs">Carrum Downs, 3201</option>
+									<option value="donvale">Donvale, 3111</option>
+									<option value="hoppers crossing">Hoppers Crossing, 3029</option>
+									<option value="mickleham">Mickleham, 3064</option>
+									<option value="east brighton">East Brighton, 3187</option>
+									<option value="bonbeach">Bonbeach, 3196</option>
+									<option value="black rock">Black Rock, 3193</option>
+									<option value="brighton">Brighton, 3186</option>
+									<option value="springvale">Springvale, 3171</option>
+									<option value="aspendale gardens">Aspendale Gardens, 3195</option>
+									<option value="mordialloc">Mordialloc, 3195</option>
+									<option value="yarraville">Yarraville, 3013</option>
+									<option value="mitcham">Mitcham, 3132</option>
+									<option value="upwey">Upwey, 3158</option>
+									<option value="dandenong north">Dandenong North, 3175</option>
+									<option value="altona">Altona, 3018</option>
+									<option value="seaford">Seaford, 3198</option>
+									<option value="port melbourne">Port Melbourne, 3207</option>
+									<option value="burwood east">Burwood East, 3151</option>
+									<option value="gladstone park">Gladstone Park, 3043</option>
+									<option value="caulfield">Caulfield, 3162</option>
+									<option value="scoresby">Scoresby, 3179</option>
+									<option value="heidelberg west">Heidelberg West, 3081</option>
+									<option value="bayswater north">Bayswater North, 3153</option>
+									<option value="kilsyth south">Kilsyth South, 3137</option>
+									<option value="belgrave heights">Belgrave Heights, 3160</option>
+									<option value="watsonia north">Watsonia North, 3087</option>
+									<option value="clarinda">Clarinda, 3169</option>
+									<option value="coburg">Coburg, 3058</option>
+									<option value="kew east">Kew East, 3102</option>
+									<option value="fitzroy north">Fitzroy North, 3068</option>
+									<option value="carnegie">Carnegie, 3163</option>
+									<option value="bulleen">Bulleen, 3105</option>
+									<option value="tullamarine">Tullamarine, 3043</option>
+									<option value="bundoora">Bundoora, 3083</option>
+									<option value="alphington">Alphington, 3078</option>
+									<option value="balwyn north">Balwyn North, 3104</option>
+									<option value="brunswick west">Brunswick West, 3055</option>
+									<option value="hampton">Hampton, 3188</option>
+									<option value="maidstone">Maidstone, 3012</option>
+									<option value="seabrook">Seabrook, 3028</option>
+									<option value="maribyrnong">Maribyrnong, 3032</option>
+									<option value="south yarra">South Yarra, 3141</option>
+									<option value="ivanhoe">Ivanhoe, 3079</option>
+									<option value="frankston south">Frankston South, 3199</option>
 								</select>
 							</div>
 						
@@ -224,7 +215,7 @@
 			</div>
 			<div class="col-md-4">
 				<h3 class="t-center" style="font-size:150%; color:red;">
-					<span><%= volNGO.length %> NGOs in <%= volNGO[0].suburb %>.	</span>
+					<span><%= volNGO.length %> NGOs founded.</span>
 				</h3>
 			</div>
 			<div class="col-md-4">
@@ -329,6 +320,10 @@
 
 	<script>
 		$('.auto-save').savy('load');
+		
+		function clean_vol(){
+			localStorage.clear();
+		}
 	</script>
 
 	<% include partials/footer %>
