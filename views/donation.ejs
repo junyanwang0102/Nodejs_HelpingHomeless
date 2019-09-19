@@ -29,7 +29,7 @@
 							<div class="col-md-3">
 							</div>
 							<div class="col-md-3">
-								<select class="form-control selectpicker dropdown show-tick show-menu-arrow" data-live-search="true" data-size="6" data-style="btn-warning" name="location" id="location" placeholder="Select or search your suburb">
+								<select class="auto-save form-control selectpicker dropdown show-tick show-menu-arrow" data-live-search="true" data-size="6" data-style="btn-warning" name="location" id="location" placeholder="Select or search your suburb">
 									<option>Select or search your suburb</option>
 									<option value="Melbourne">Melbourne</option>
 									<option value="Fitzroy">Fitzroy</option>
@@ -60,7 +60,7 @@
 								</select>
 							</div>
 							<div class="col-md-3">
-								<input id="sub" type="submit" value="Start" class="btn btn-outline-danger btn-lg btn-block" style="line-height:50%;">
+								<input id="sub" type="submit" value="Start" class="btn btn-outline-danger btn-lg btn-block auto-save" style="line-height:50%;">
 							</div>
 							<div class="col-md-3">
 							</div>
@@ -77,24 +77,13 @@
 			</div>
 			<div class="col-md-4">
 				<h3 class="t-center" style="font-size:150%; color:red;">
-					<span>
-						<%= donationNGO.length %> NGOs in
-							<%= donationNGO[0].Suburb %>.</span>
+					<span><%= donationNGO.length %> NGOs in <%= donationNGO[0].Suburb %>.</span>
 				</h3>
 			</div>
 			<div class="col-md-4">
 			</div>
-			<% } else { %>
-				<!-- <div class="col-md-4">
-				</div>
-				<div class="col-md-4">
-					<h3 class="t-center p-t-3" style="font-size:150%; color:red;">
-						<span>Make The Selction <br /> Get Recommendations!</span>
-					</h3>
-				</div>
-				<div class="col-md-4">
-				</div> -->
-				<% } %>
+		<% } else { %>
+		<% } %>
 	</div>
 
 	<% if(donationNGO.length !== 0){ %>
@@ -191,60 +180,63 @@
 				</div>
 			</div>
 		</section>
-		<% } else { %>
-			<div style="height:0;"></div>
+	<% } else { %>
+		<div style="height:0;"></div>
+	<% } %>
+
+	<script type="text/javascript">
+		function initMap() {
+			var infowindow = new google.maps.InfoWindow();
+			<% donationNGO.forEach( ngo => { %>
+				var latitude = <%= ngo.Latitude %>;
+				var longitude = <%= ngo.Longitude %>;
+				var center = {
+					lat: latitude,
+					lng: longitude
+				};
+				var map = new google.maps.Map(document.getElementById('map'), {
+					zoom: 15,
+					center: center,
+					gestureHandling: 'cooperative'
+				});
+			<% }) %>
+			
+			<% function placeMarker(ngo) { %>
+				<% var lat = ngo.Latitude; %>
+				<% var lng = ngo.Longitude; %>
+				<% var name = ngo.Name; %>
+				<% var address = ngo.Address; %>
+				<% var phone = ngo.Phone; %>
+				<% var website = ngo.Website; %>
+				<% var public_holidays = ngo.Public_holidays; %>
+				var latLng = new google.maps.LatLng(<%=lat%>, <%=lng%>);
+				var marker = new google.maps.Marker({
+					position: latLng,
+					map: map,
+					animation: google.maps.Animation.DROP
+				});
+				marker.addListener('click', function() {
+					//marker.getPosition(this.position);
+					infowindow.close();
+					infowindow.setContent(`<div style="padding: 10px;"><p class="text-left" style="color:red;"><strong><%=name%></strong></p><br /><p class="text-left"><%=address%></p><br /><p class="text-left">Phone: <strong><%=phone%></strong></p><br /><p class="text-left">Website: <a href="https://<%=website%>" target="_blank"><strong style="color:green;"><%= website %></strong></a></p><br /><p class="text-left">Public Holidays: <strong><%=public_holidays%></strong></p></div>`);
+					infowindow.open(map, marker);
+					infowindow.setPosition(this.position);
+					});
 			<% } %>
+			
+			<% for (var i = 0; i < donationNGO.length; i++) { %>
+				<% placeMarker(donationNGO[i]); %>
+			<% } %>
+		}
+		google.maps.event.addDomListener(window, 'load', initMap);
+	</script>
 
-				<script>
-					function initMap() {
-						var infowindow = new google.maps.InfoWindow();
-						<% donationNGO.forEach( ngo => { %>
-						var latitude = <%= ngo.Latitude %>;
-						var longitude = <%= ngo.Longitude %>;
-						var center = {
-							lat: latitude,
-							lng: longitude
-						};
-						var map = new google.maps.Map(document.getElementById('map'), {
-							zoom: 15,
-							center: center,
-							gestureHandling: 'cooperative'
-						});
-						<% }) %>
-						<% function placeMarker(ngo) { %>
-						<% var lat = ngo.Latitude; %>
-						<% var lng = ngo.Longitude; %>
-						<% var name = ngo.Name; %>
-						<% var address = ngo.Address; %>
-						<% var phone = ngo.Phone; %>
-						<% var website = ngo.Website; %>
-						<% var public_holidays = ngo.Public_holidays; %>
-						var latLng = new google.maps.LatLng(<%=lat%>, <%=lng%>);
-						var marker = new google.maps.Marker({
-							position: latLng,
-							map: map,
-							animation: google.maps.Animation.DROP
-						});
-						marker.addListener('click', function() {
-							//marker.getPosition(this.position);
-							infowindow.close();
-							infowindow.setContent(`<div style="padding: 10px;"><p class="text-left" style="color:red;"><strong><%=name%></strong></p><br /><p class="text-left"><%=address%></p><br /><p class="text-left">Phone: <strong><%=phone%></strong></p><br /><p class="text-left">Website: <a href="https://<%=website%>" target="_blank"><strong style="color:green;"><%= website %></strong></a></p><br /><p class="text-left">Public Holidays: <strong><%=public_holidays%></strong></p></div>`);
-							infowindow.open(map, marker);
-							infowindow.setPosition(this.position);
-							//map.setZoom(15);
-							// if (marker.getAnimation() !== null) {
-							// 	marker.setAnimation(null);
-							// } else {
-							// 	marker.setAnimation(google.maps.Animation.BOUNCE);
-							// }
-						});
-						<% } %>
-						<% for (var i = 0; i < donationNGO.length; i++) { %>
-						<% placeMarker(donationNGO[i]); %>
-						<% } %>
-					}
-					google.maps.event.addDomListener(window, 'load', initMap);
-				</script>
-				<script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDEmNNZ8gW73CShJzZLosV-kb3_JYtFua0&callback=initMap"></script>
+	<script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDEmNNZ8gW73CShJzZLosV-kb3_JYtFua0&callback=initMap"></script>
+	<script src="/stylesheets/jquery.min.js"></script>
+	<script src="/stylesheets/savy.min.js"></script>
 
-				<% include partials/footer %>
+	<script>
+		$('.auto-save').savy('load');
+	</script>
+
+<% include partials/footer %>

@@ -39,7 +39,7 @@
 							<div class="col-md-4">
 								<select class="form-control selectpicker dropdown show-tick show-menu-arrow" data-live-search="true" data-size="6" data-style="btn-warning" name="location" id="location" placeholder="Select or search your suburb">
 									<option>Select or search your suburb</option>
-									<option value="melbourne">Melbourne</option>
+									<option value="melbourne">Melbourne, 3100</option>
 									<option value="kew">Kew</option>
 									<option value="box hill">Box Hill</option>
 									<option value="richmond">Richmond</option>
@@ -207,7 +207,6 @@
 							<div class="col-md-4">
 								<input type="submit" value="Search" class="btn btn-outline-danger btn-lg btn-block" style="line-height:50%;">
 							</div>
-							
 						</div>
 					</div>
 				</form>
@@ -218,7 +217,6 @@
 	<div class="row">
 		<% if(volNGO.length !== 0){ %>
 			<div class="col-md-4">
-				
 			</div>
 			<div class="col-md-4">
 				<h3 class="t-center" style="font-size:150%; color:red;">
@@ -228,15 +226,6 @@
 			<div class="col-md-4">
 			</div>
 		<% } else { %>
-			<!-- <div class="col-md-4">
-			</div>
-			<div class="col-md-4">
-				<h3 class="t-center p-t-3" style="font-size:150%; color:red;">
-					<span>Make The Selction <br /> Get Recommendations!</span>
-				</h3>
-			</div>
-			<div class="col-md-4">
-			</div> -->
 		<% } %>
 	</div>
 
@@ -248,7 +237,7 @@
 							<% volNGO.forEach(ngo => { %>
 								<div class="card">
 									<div class="card-header" id="headingOne">
-										<h5 class="mb-0">
+										<h5 class="mb-0" id="span1">
 											<button class="btn btn-link collapsed" data-toggle="collapse" data-target="#collapse<%= ngo._id %>" aria-expanded="false" aria-controls="collapse<%= ngo._id %>" style="text-decoration:none;" >
 												<span style="color:black;"><%= ngo.name %></span>
 											</button>
@@ -320,15 +309,16 @@
 					// }
 			  	});
 			<% } %>
-									   
+			
+			
 			<% for (var i = 0; i < volNGO.length; i++) { %>
 				<% placeMarker(volNGO[i]); %>
 			<% } %>
 			
 		}
-		
-		
 		google.maps.event.addDomListener(window, 'load', initMap);
+		
+		
 
 		
 		

@@ -155,20 +155,24 @@ app.get('/donations', (req,res) => {
 	if (typeof location !== "undefined") {
 		var suburb_str = location.split(",");
 		var suburb_name = suburb_str[0];
-		DonationNgo.find({Suburb: suburb_name}, (err, donationNGOs) => {
-			if (err) {
-				console.log(err);
-			} else {
-				res.render("donation", {donationNGO: donationNGOs});
-			}
+		DonationNgo.find({}, (err, allDonationNGOs) => {
+			DonationNgo.find({Suburb: suburb_name}, (err, donationNGOs) => {
+				if (err) {
+					console.log(err);
+				} else {
+					res.render("donation", {allNGOs: allDonationNGOs, donationNGO: donationNGOs});
+				}
+			});
 		});
 	} else {
-		DonationNgo.find({suburb: "shanghai"}, (err, donationNGOs) => {
-			if (err) {
-				console.log(err);
-			} else {
-				res.render("donation", {donationNGO: donationNGOs});
-			}
+		DonationNgo.find({}, (err, allDonationNGOs) => {
+			DonationNgo.find({suburb: "shanghai"}, (err, donationNGOs) => {
+				if (err) {
+					console.log(err);
+				} else {
+					res.render("donation", {allNGOs: allDonationNGOs, donationNGO: donationNGOs});
+				}
+			});
 		});
 	}
 });
