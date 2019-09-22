@@ -28,7 +28,11 @@
 	<link rel="stylesheet" type="text/css" href="/stylesheets/agency.css">
 	<link rel="stylesheet" type="text/css" href="/stylesheets/util.css">
 	<link rel="stylesheet" type="text/css" href="/stylesheets/main.css">
-
+	<script>
+		function clean(){
+			localStorage.clear();
+		}
+	</script>
 </head>
 
 <body id="page-top">
@@ -40,37 +44,37 @@
 			<a class="navbar-brand js-scroll-trigger" href="/">Supportive</a>
 
 			<button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
-
 				<i class="fas fa-bars"></i>
-
 			</button>
 
 			<div class="collapse navbar-collapse" id="navbarResponsive">
 
 				<ul class="navbar-nav text-uppercase ml-auto">
 
-					<li class="nav-item">
-						<a class="nav-link js-scroll-trigger" href="/"><strong>HOME</strong></a>
+					<li class="nav-item"> 
+						<a class="nav-link js-scroll-trigger t-center" href="/" onClick="clean()">
+							<strong>HOME</strong>
+						</a>
 					</li>
 					
 					<li class="nav-item">
-						<a class="nav-link js-scroll-trigger" href="/homelessdv"><strong>Facts</strong></a>
-					</li>
-
-					<!-- <li class="nav-item">
-						<a class="nav-link js-scroll-trigger" href="/#news"><strong>News</strong></a>
-					</li> -->
-					
-					<button class="btn btn-danger btn-sm text-uppercase" style="margin-right:0.2rem; margin-left:2px;">
+						<a class="nav-link js-scroll-trigger t-center" href="/homelessdv" onClick="clean()">
+							<strong>FACTS</strong>
+						</a>
+					</li> 
+					&nbsp;
+					<button class="btn btn-danger btn-sm text-uppercase">
 						<li class="nav-item">
-							<a class="nav-link js-scroll-trigger" href="/donations" onClick="clean_vol()"><strong>&nbsp;Donate &nbsp;</strong>
+							<a class="nav-link js-scroll-trigger" href="/donations" onClick="clean()">
+								<strong>&nbsp;  Donate  &nbsp;</strong>
 							</a>
 						</li>	
 					</button>
-	
+					&nbsp;
 					<button class="btn btn-warning btn-sm text-uppercase">
 						<li class="nav-item">
-							<a class="nav-link js-scroll-trigger" href="/volunteers" onClick="clean_donate()"><strong>Volunteer</strong>
+							<a class="nav-link js-scroll-trigger" href="/volunteers" onClick="clean()">
+								<strong>Volunteer</strong>
 							</a>
 						</li>
 					</button>

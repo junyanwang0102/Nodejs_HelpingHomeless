@@ -28,7 +28,7 @@
 						<div class="row">
 							<div class="col-md-3">
 							</div>
-							<div class="col-md-3">
+							<div class="col-md-3" style="margin-bottom:5px;">
 								<select class="form-control selectpicker dropdown show-tick show-menu-arrow auto-save" data-live-search="true" data-size="6" data-style="btn-warning" name="location" id="donatelocation" placeholder="Select or search your suburb">
 									<option>Select or search your suburb</option>
 									<option value="Melbourne">Melbourne, 3000</option>
@@ -84,7 +84,6 @@
 		<% } else { %>
 		<% } %>
 	</div>
-
 
 	<% if(donationNGO.length !== 0){ %>
 		<section style="padding-top:0.5rem; padding-bottom:100px;" style="position:relative;">
@@ -184,6 +183,8 @@
 		<div style="height:0;"></div>
 	<% } %>
 
+
+
 	<script type="text/javascript">
 		function initMap() {
 			var infowindow = new google.maps.InfoWindow();
@@ -200,6 +201,7 @@
 					gestureHandling: 'cooperative'
 				});
 			<% }) %>
+			
 			
 			<% function placeMarker(ngo) { %>
 				<% var lat = ngo.Latitude; %>
@@ -228,7 +230,6 @@
 				<% placeMarker(donationNGO[i]); %>
 			<% } %>
 		}
-		google.maps.event.addDomListener(window, 'load', initMap);
 	</script>
 
 	<script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDEmNNZ8gW73CShJzZLosV-kb3_JYtFua0&callback=initMap"></script>
@@ -237,10 +238,6 @@
 
 	<script>
 		$('.auto-save').savy('load');
-		
-		function clean_donate(){
-			localStorage.clear();
-		}
 	</script>
 
 <% include partials/footer %>

@@ -25,7 +25,7 @@
 				<form action="/volunteers" method="GET"> 
 					<div class="form-group">
 						<div class="row">
-							<div class="col-md-4">
+							<div class="col-md-4" style="margin-bottom:5px;">
 								<select id="description" class="form-control selectpicker dropdown show-tick show-menu-arrow auto-save" data-style="btn-warning" name="description" placeholder="Choose a category of homeless">
 									<option>Choose a category of homeless (Optional)</option>
 									<option value="children">Children</option>
@@ -34,8 +34,7 @@
 									<option value="family">Family</option>
 								</select>
 							</div>
-							
-							<div class="col-md-4">
+							<div class="col-md-4" style="margin-bottom:5px;">
 								<select class="form-control selectpicker dropdown show-tick show-menu-arrow auto-save" data-live-search="true" data-size="6" data-style="btn-warning" name="location" id="vol-location" placeholder="Select or search your suburb">
 									<option>Select or search a suburb</option>
 									<option value="melbourne">Melbourne, 3000</option>
@@ -320,10 +319,6 @@
 
 	<script>
 		$('.auto-save').savy('load');
-		
-		function clean_vol(){
-			localStorage.clear();
-		}
 	</script>
 
-	<% include partials/footer %>
+<% include partials/footer %>
