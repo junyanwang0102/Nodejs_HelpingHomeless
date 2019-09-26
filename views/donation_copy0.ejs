@@ -1,0 +1,136 @@
+<% include partials/header %>
+	
+
+	<!-- form of donation -->
+	<div style="padding-top:1rem; padding-bottom:2rem;">
+		<div class="container-fluid">
+			<div style="margin:0 auto;">
+				<form action="/donations" method="GET">
+					<div class="form-group">
+						<div class="row">
+							<div class="col-md-3">
+							</div>
+							<div class="col-md-3" style="margin-bottom:5px;">
+								<select class="form-control selectpicker dropdown show-tick show-menu-arrow auto-save" data-live-search="true" data-size="6" data-style="btn-warning" name="location" id="donatelocation" placeholder="Select or search your suburb">
+									<option>Select or search your suburb</option>
+									<option value="Melbourne">Melbourne, 3000</option>
+									<option value="Fitzroy">Fitzroy, 3065</option>
+									<option value="Collingwood">Collingwood, 3066</option>
+									<option value="Kensington">Kensington, 3031</option>
+									<option value="Carlton North">Carlton North, 3054</option>
+									<option value="St Kilda">St Kilda, 3182</option>
+									<option value="West Melbourne">West Melbourne, 3003</option>
+									<option value="North Melbourne">North Melbourne, 3051</option>
+									<option value="Carlton">Carlton, 3053</option>
+									<option value="East Melbourne">East Melbourne, 3002</option>
+									<option value="South Melbourne">South Melbourne, 3205</option>
+									<option value="Richmond">Richmond, 3121</option>
+									<option value="Flemington">Flemington, 3031</option>
+									<option value="Parkville">Parkville, 3052</option>
+									<option value="Footscray">Footscray, 3011</option>
+									<option value="Box Hill">Box Hill, 3128</option>
+									<option value="Preston">Preston, 3072</option>
+									<option value="Caulfield South">Caulfield South, 3162</option>
+									<option value="Albert Park">Albert Park, 3206</option>
+									<option value="Dandenong">Dandenong, 3175</option>
+									<option value="Moonee Ponds">Moonee Ponds, 3039</option>
+									<option value="Abbotsford">Abbotsford, 3067</option>
+									<option value="North Fitzroy">North Fitzroy, 3068</option>
+									<option value="Northcote">Northcote, 3070</option>
+									<option value="Glenroy">Glenroy, 3046</option>
+								</select>
+							</div>
+							<div class="col-md-3">
+								<input id="donate-sub" type="submit" value="Start" class="btn btn-outline-danger btn-lg btn-block" style="line-height:50%;">
+							</div>
+							<div class="col-md-3">
+							</div>
+						</div>
+					</div>
+				</form>
+			</div>
+		</div>
+	</div>
+
+	<div class="row">
+		<% if(donationNGO.length !== 0){ %>
+			<div class="col-md-4">
+			</div>
+			<div class="col-md-4">
+				<h3 class="t-center" style="font-size:150%; color:red;">
+					<span><%= donationNGO.length %> NGOs founded.</span>
+				</h3>
+			</div>
+			<div class="col-md-4">
+			</div>
+		<% } else { %>
+		<% } %>
+	</div>
+
+	<% if(donationNGO.length !== 0){ %>
+		<section style="padding-top:0.5rem; padding-bottom:100px;" style="position:relative;">
+			<div class="row text-center" style="display:flex; flex-wrap:wrap;">
+				<!-- 生成右边的 map -->
+				<div class="col-xs-12 col-md-12" id="map" style="height:800px;">
+				</div>
+			</div>
+		</section>
+	<% } else { %>
+		<div style="height:0">
+		</div>
+	<% } %>
+		
+	<script>
+		function initMap() {
+			var center = {
+				lat: -37.8136,
+				lng: 144.9631
+			};
+			var map = new google.maps.Map(document.getElementById('map'), {
+				zoom: 15,
+				center: center,
+				gestureHandling: 'cooperative'
+			});
+			var ngos = [<%-donationNGO%>];
+			for (var i = 0; i < ngos.length; i++) {
+                var val = ngos[i];
+                var lat = val.Latitude;
+                var lng = val.Longitude;
+                var name = val.Name;
+                var suburb = val.Suburb;
+				var address = ngo.Address;
+                var location = {
+                    lat: lat,
+                    lng: lng
+                };
+                var content = "Name：" + name + "<br/>" + "Suburb: " + suburb + "<br/>" + "Address: " + address;
+                var info = {
+                    position: {
+                        lat: lat,
+                        lng: lng
+                    },
+                    content: content,
+                }
+                addMarker(info);
+            }
+			
+			function addMarker(data) {
+                var marker = new google.maps.Marker({
+                    position: data.position,
+                    map: map
+                });
+                var infowindow = new google.maps.InfoWindow({
+                    content: data.content
+                });
+                marker.addListener('click', function() {
+                    infowindow.open(map, marker);
+                });
+            }
+			
+		} 
+	</script>
+	<script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDEmNNZ8gW73CShJzZLosV-kb3_JYtFua0&callback=initMap"></script>
+
+<% include partials/footer %>
+
+

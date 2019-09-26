@@ -94,10 +94,10 @@
 							<div class="card">
 								<div class="card-header" id="headingOne">
 									<h5 class="mb-0" id="span1">
-										<button id="btn1" class="btn btn-link collapsed" data-toggle="collapse" data-target="#collapse<%= ngo._id %>" aria-expanded="false" aria-controls="collapse<%= ngo._id %>" style="text-decoration:none;">
-											<span id="span1" style="color:black;">
-												<%=ngo.Name%>
-											</span>
+										<button class="btn btn-link collapsed" data-toggle="collapse" data-target="#collapse<%= ngo._id %>" aria-expanded="false" aria-controls="collapse<%= ngo._id %>" style="text-decoration:none;">
+											<a href="javascript:google.maps.event.trigger(gmarkers['tigger<%= ngo._id %>'],'click');" style="color:black;">
+												<strong><%= ngo.Name %></strong>
+											</a>
 										</button>
 									</h5>
 								</div>
@@ -180,15 +180,15 @@
 			</div>
 		</section>
 	<% } else { %>
-		<div style="height:0;"></div>
+		<div style="height:0">
+		</div>
 	<% } %>
-
-
-
-	<script type="text/javascript">
+		
+	<script>
 		function initMap() {
-			var infowindow = new google.maps.InfoWindow();
-			<% donationNGO.forEach( ngo => { %>
+			<% if(donationNGO.length !== 0){ %>
+				var infowindow = new google.maps.InfoWindow();
+				<% var ngo = donationNGO[0]; %>
 				var latitude = <%= ngo.Latitude %>;
 				var longitude = <%= ngo.Longitude %>;
 				var center = {
@@ -200,44 +200,41 @@
 					center: center,
 					gestureHandling: 'cooperative'
 				});
-			<% }) %>
 			
+				<% donationNGO.forEach(ngo => { %>
+					<% placeMarker(ngo); %>
+				<% }) %>
+				
+				<% function placeMarker(ngo) { %>
+					<% var lat = ngo.Latitude; %>
+					<% var lng = ngo.Longitude; %>
+					<% var name = ngo.Name; %>
+					<% var address = ngo.Address; %>
+					<% var phone = ngo.Phone; %>
+					<% var website = ngo.Website; %>
+					<% var public_holidays = ngo.Public_holidays; %>
 			
-			<% function placeMarker(ngo) { %>
-				<% var lat = ngo.Latitude; %>
-				<% var lng = ngo.Longitude; %>
-				<% var name = ngo.Name; %>
-				<% var address = ngo.Address; %>
-				<% var phone = ngo.Phone; %>
-				<% var website = ngo.Website; %>
-				<% var public_holidays = ngo.Public_holidays; %>
-				var latLng = new google.maps.LatLng(<%=lat%>, <%=lng%>);
-				var marker = new google.maps.Marker({
-					position: latLng,
-					map: map,
-					animation: google.maps.Animation.DROP
-				});
-				marker.addListener('click', function() {
-					//marker.getPosition(this.position);
-					infowindow.close();
-					infowindow.setContent(`<div style="padding: 10px;"><p class="text-left" style="color:red;"><strong><%=name%></strong></p><br /><p class="text-left"><%=address%></p><br /><p class="text-left">Phone: <strong><%=phone%></strong></p><br /><p class="text-left">Website: <a href="https://<%=website%>" target="_blank"><strong style="color:green;"><%= website %></strong></a></p><br /><p class="text-left">Public Holidays: <strong><%=public_holidays%></strong></p></div>`);
-					infowindow.open(map, marker);
-					infowindow.setPosition(this.position);
+					var marker = new google.maps.Marker({
+						position: new google.maps.LatLng(<%=lat%>, <%=lng%>),
+						map: map,
+						animation: google.maps.Animation.DROP
 					});
-			<% } %>
 			
-			<% for (var i = 0; i < donationNGO.length; i++) { %>
-				<% placeMarker(donationNGO[i]); %>
+					marker.addListener('click', function() {
+						infowindow.close();
+						infowindow.setContent("hello");
+						infowindow.open(map, marker);
+						infowindow.setPosition(this.position);
+					}); 
+					console.log("sadfas");
+				<% } %>
+			
+			
 			<% } %>
-		}
+		} 
 	</script>
-
 	<script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDEmNNZ8gW73CShJzZLosV-kb3_JYtFua0&callback=initMap"></script>
-	<script src="/stylesheets/jquery.min.js"></script>
-	<script src="/stylesheets/savy.min.js"></script>
-
-	<script>
-		$('.auto-save').savy('load');
-	</script>
 
 <% include partials/footer %>
+
+
