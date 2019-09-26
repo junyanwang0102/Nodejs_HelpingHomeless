@@ -90,20 +90,19 @@
 			<div class="row text-center" style="display:flex; flex-wrap:wrap;">
 				<div class="col-xs-0 col-md-3 d-none d-sm-block" style="overflow-y: auto; height:800px;">
 					<div id="accordion" class="thumbnail">
-						<% for(var i = 0; i < donationNGO.length; i++) { %>
-							<% var ngo = donationNGO[i]; %>
+						<% donationNGO.forEach(ngo => { %>
 							<div class="card">
 								<div class="card-header" id="headingOne">
 									<h5 class="mb-0" id="span1">
-										<button class="btn btn-link collapsed" data-toggle="collapse" data-target="#collapse<%-i%>" aria-expanded="false" aria-controls="collapse<%-i%>" style="text-decoration:none;">
-											<a href="javascript:google.maps.event.trigger(gmarkers['tigger<%-i%>'],'click');" style="color:black;">
+										<button class="btn btn-link collapsed" data-toggle="collapse" data-target="#collapse<%= ngo._id %>" aria-expanded="false" aria-controls="collapse<%= ngo._id %>" style="text-decoration:none;">
+											<a href="javascript:google.maps.event.trigger(gmarkers['tigger<%= ngo._id %>'],'click');" style="color:black;">
 												<strong><%= ngo.Name %></strong>
 											</a>
 										</button>
 									</h5>
 								</div>
 
-								<div id="collapse<%-i%>" class="collapse" aria-labelledby="headingOne" data-parent="#accordion">
+								<div id="collapse<%= ngo._id %>" class="collapse" aria-labelledby="headingOne" data-parent="#accordion">
 									<div class="card-body">
 										<ul class="text-left">
 											<li>
@@ -172,7 +171,7 @@
 									</div>
 								</div>
 							</div>
-							<% } %>
+							<% }) %>
 					</div>
 				</div>
 				<!-- 生成右边的 map -->
@@ -203,10 +202,16 @@
 				});
 			
 				var markers = [];
-				var markers2 = [];
-				gmarkers = [];
 				var ngos = [<%-donationNGO%>];
-				var allngos = [<%-all%>];
+				console.log(ngos);
+
+				ngos.forEach(ngo => { 
+					placeMarker(ngo);
+				})
+			
+				var markerCluster = new MarkerClusterer(map, markers, {
+					imagePath: 'https://developers.google.com/maps/documentation/javascript/examples/markerclusterer/m'
+				});
 
 
 				function placeMarker(ngo) { 
@@ -227,61 +232,11 @@
 
 					marker.addListener('click', function() {
 						infowindow.close();
-						infowindow.setContent(`<div style="padding: 10px;"> <p class="text-left" style="color:red;"><strong>${name}</strong></p><br /><p class="text-left">${address}</p><br /><p class="text-left">Phone: <strong>${phone}</strong></p><br /><p class="text-left"><a href="https://${website}" target="_blank" style="color:red;"><strong>website: ${website}</strong></a></p><br /><p class="text-left">Public Holidays: <strong>${public_holidays}</strong></p></div>`);
+						infowindow.setContent("hello");
 						infowindow.open(map, marker);
 						infowindow.setPosition(this.position);
 					});
-					marker.addListener('click', toggleBounce);
-					
-					function toggleBounce() {
-					  if (marker.getAnimation() !== null) {
-						marker.setAnimation(null);
-					  } else {
-						marker.setAnimation(google.maps.Animation.BOUNCE);
-					  }
-					}
-					return marker;
 				}
-			
-				function placeMarker2(ngo) { 
-					var lat = ngo.Latitude;
-					var lng = ngo.Longitude;
-					var name = ngo.Name;
-					var address = ngo.Address;
-					var phone = ngo.Phone;
-					var website = ngo.Website;
-					var public_holidays = ngo.Public_holidays;
-
-					var marker2 = new google.maps.Marker({
-						position: new google.maps.LatLng(lat, lng),
-						map: map,
-						animation: google.maps.Animation.DROP
-					});
-					markers2.push(marker2);
-
-					marker2.addListener('click', function() {
-						infowindow.close();
-						infowindow.setContent(`<div style="padding: 10px;"> <p class="text-left" style="color:red;"><strong>${name}</strong></p><br /><p class="text-left">${address}</p><br /><p class="text-left">Phone: <strong>${phone}</strong></p><br /><p class="text-left"><a href="https://${website}" target="_blank" style="color:red;"><strong>website: ${website}</strong></a></p><br /><p class="text-left">Public Holidays: <strong>${public_holidays}</strong></p></div>`);
-						infowindow.open(map, marker2);
-						infowindow.setPosition(this.position);
-					});
-				}
-			
-				// ngos.forEach(ngo => {
-				// 	gmarkers['toggle'+ ngos._id] = placeMarker(ngo);
-				// })
-				for(var i = 0; i < ngos.length; i++) {
-					var ngo = ngos[i];
-					gmarkers['tigger'+i] = placeMarker(ngo);
-				}
-				for(var i = 0; i < allngos.length; i++) {
-					var allngo = allngos[i];
-					placeMarker2(allngo);
-				}
-			
-				var markerCluster = new MarkerClusterer(map, markers2, {
-					imagePath: 'https://developers.google.com/maps/documentation/javascript/examples/markerclusterer/m'
-				});
 			
 			<% } %>
 		} 

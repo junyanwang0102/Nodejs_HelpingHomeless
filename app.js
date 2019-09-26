@@ -153,14 +153,14 @@ app.get('/volunteers', (req,res) => {
 app.get('/donations', (req,res) => {
 	var location = req.query.location;
 	if (typeof location !== "undefined") {
-		var suburb_str = location.split(",");
-		var suburb_name = suburb_str[0];
-		DonationNgo.find({Suburb: suburb_name}, function(err, donationNGOs) {
-			if (err) {
-				console.log(err);
-			} else {
-				res.render("donation", {donationNGO: donationNGOs});
-			}
+		DonationNgo.find({}, {_id:0}, function(err, allngos) {
+			DonationNgo.find({Suburb: location}, {_id:0}, function(err, donationNGOs) {
+				if (err) {
+					console.log(err);
+				} else {
+					res.render("donation", {all: allngos, donationNGO: donationNGOs});
+				}
+			});
 		});
 	} else {
 		DonationNgo.find({suburb: "shanghai"}, function(err, donationNGOs) {
