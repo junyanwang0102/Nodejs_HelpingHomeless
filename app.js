@@ -159,7 +159,7 @@ app.get('/donations', (req,res) => {
 			if (err) {
 				console.log(err);
 			} else {
-				res.render("donation_copy0", {donationNGO: donationNGOs});
+				res.render("donation", {donationNGO: donationNGOs});
 			}
 		});
 	} else {
@@ -167,7 +167,7 @@ app.get('/donations', (req,res) => {
 			if (err) {
 				console.log(err);
 			} else {
-				res.render("donation_copy0", {donationNGO: donationNGOs});
+				res.render("donation", {donationNGO: donationNGOs});
 			}
 		});
 	}

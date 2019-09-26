@@ -91,7 +91,8 @@
 				center: center,
 				gestureHandling: 'cooperative'
 			});
-			var ngos = [<%-donationNGO%>];
+			<% var ngos = donationNGO %>;
+			<% console.log(ngos); %>;
 			for (var i = 0; i < ngos.length; i++) {
                 var val = ngos[i];
                 var lat = val.Latitude;
