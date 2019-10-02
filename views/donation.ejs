@@ -23,7 +23,7 @@
 	<div style="padding-top:1rem; padding-bottom:2rem;">
 		<div class="container-fluid">
 			<div style="margin:0 auto;">
-				<form action="/donations" method="GET">
+				<form action="" method="GET">
 					<div class="form-group">
 						<div class="row">
 							<div class="col-md-3">
@@ -59,7 +59,7 @@
 								</select>
 							</div>
 							<div class="col-md-3">
-								<input id="donate-sub" type="submit" value="Start" class="btn btn-outline-danger btn-lg btn-block" style="line-height:50%;">
+								<input id="donate-sub" type="submit" value="Start" class="btn btn-outline-danger btn-lg btn-block" style="line-height:50%;" />
 							</div>
 							<div class="col-md-3">
 							</div>
@@ -95,11 +95,11 @@
 							<div class="card">
 								<div class="card-header" id="headingOne">
 									<h5 class="mb-0" id="span1">
-										<button class="btn btn-link collapsed" data-toggle="collapse" data-target="#collapse<%-i%>" aria-expanded="false" aria-controls="collapse<%-i%>" style="text-decoration:none;">
-											<a href="javascript:google.maps.event.trigger(gmarkers['tigger<%-i%>'],'click');" style="color:black;">
+										<a href="javascript:google.maps.event.trigger(gmarkers['tigger<%-i%>'],'click');" style="color:black;">
+											<button class="btn btn-link collapsed" data-toggle="collapse" data-target="#collapse<%-i%>" aria-expanded="false" aria-controls="collapse<%-i%>" style="text-decoration:none; color:black;">
 												<strong><%= ngo.Name %></strong>
-											</a>
-										</button>
+											</button>
+										</a>
 									</h5>
 								</div>
 
@@ -181,11 +181,14 @@
 			</div>
 		</section>
 	<% } else { %>
-		<div style="height:0">
-		</div>
+		<div style="height:0"></div>
 	<% } %>
 		
 	<script>
+		// $("#donate-sub").submit(function(e) {
+		// 	e.preventDefault();
+		// });
+		
 		function initMap() {
 			<% if(donationNGO.length !== 0){ %>
 				var infowindow = new google.maps.InfoWindow();
@@ -202,11 +205,8 @@
 					gestureHandling: 'cooperative'
 				});
 			
-				var markers = [];
-				var markers2 = [];
 				gmarkers = [];
 				var ngos = [<%-donationNGO%>];
-				var allngos = [<%-all%>];
 
 
 				function placeMarker(ngo) { 
@@ -223,66 +223,21 @@
 						map: map,
 						animation: google.maps.Animation.DROP
 					});
-					markers.push(marker);
 
 					marker.addListener('click', function() {
+						//marker.getPosition(this.position);
 						infowindow.close();
 						infowindow.setContent(`<div style="padding: 10px;"> <p class="text-left" style="color:red;"><strong>${name}</strong></p><br /><p class="text-left">${address}</p><br /><p class="text-left">Phone: <strong>${phone}</strong></p><br /><p class="text-left"><a href="https://${website}" target="_blank" style="color:red;"><strong>website: ${website}</strong></a></p><br /><p class="text-left">Public Holidays: <strong>${public_holidays}</strong></p></div>`);
 						infowindow.open(map, marker);
 						infowindow.setPosition(this.position);
 					});
-					marker.addListener('click', toggleBounce);
-					
-					function toggleBounce() {
-					  if (marker.getAnimation() !== null) {
-						marker.setAnimation(null);
-					  } else {
-						marker.setAnimation(google.maps.Animation.BOUNCE);
-					  }
-					}
 					return marker;
 				}
 			
-				function placeMarker2(ngo) { 
-					var lat = ngo.Latitude;
-					var lng = ngo.Longitude;
-					var name = ngo.Name;
-					var address = ngo.Address;
-					var phone = ngo.Phone;
-					var website = ngo.Website;
-					var public_holidays = ngo.Public_holidays;
-
-					var marker2 = new google.maps.Marker({
-						position: new google.maps.LatLng(lat, lng),
-						map: map,
-						animation: google.maps.Animation.DROP
-					});
-					markers2.push(marker2);
-
-					marker2.addListener('click', function() {
-						infowindow.close();
-						infowindow.setContent(`<div style="padding: 10px;"> <p class="text-left" style="color:red;"><strong>${name}</strong></p><br /><p class="text-left">${address}</p><br /><p class="text-left">Phone: <strong>${phone}</strong></p><br /><p class="text-left"><a href="https://${website}" target="_blank" style="color:red;"><strong>website: ${website}</strong></a></p><br /><p class="text-left">Public Holidays: <strong>${public_holidays}</strong></p></div>`);
-						infowindow.open(map, marker2);
-						infowindow.setPosition(this.position);
-					});
-				}
-			
-				// ngos.forEach(ngo => {
-				// 	gmarkers['toggle'+ ngos._id] = placeMarker(ngo);
-				// })
-				for(var i = 0; i < ngos.length; i++) {
-					var ngo = ngos[i];
+				ngos.forEach((ngo,i) => {
 					gmarkers['tigger'+i] = placeMarker(ngo);
-				}
-				for(var i = 0; i < allngos.length; i++) {
-					var allngo = allngos[i];
-					placeMarker2(allngo);
-				}
-			
-				var markerCluster = new MarkerClusterer(map, markers2, {
-					imagePath: 'https://developers.google.com/maps/documentation/javascript/examples/markerclusterer/m'
 				});
-			
+
 			<% } %>
 		} 
 	</script>
