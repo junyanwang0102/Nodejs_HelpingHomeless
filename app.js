@@ -93,19 +93,16 @@ app.get('/volunteers', (req,res) => {
 	var location = req.query.location;
 	var description = req.query.description;
 	if (typeof location !== "undefined") {
-		var suburb_str = location.split(",");
-		var suburb_name = suburb_str[0];
 		if (description === 'children') {
-			VolNgo.find({$and:[{suburb: suburb_name}, {children: 'y'}]}, (err, volNGOs) => {
+			VolNgo.find({$and:[{suburb: location}, {children: 'y'}]}, {_id:0}, (err, volNGOs) => {
 				if (err) {
 					console.log(err);
 				} else {
-					//console.log(volNGOs);
 					res.render("volunteer", {volNGO: volNGOs});
 				}
 			});
 		} else if (description === 'adult') {
-			VolNgo.find({$and:[{suburb: suburb_name}, {adult: 'y'}]}, (err, volNGOs) => {
+			VolNgo.find({$and:[{suburb: location}, {adult: 'y'}]}, {_id:0}, (err, volNGOs) => {
 				if (err) {
 					console.log(err);
 				} else {
@@ -113,7 +110,7 @@ app.get('/volunteers', (req,res) => {
 				}
 			});
 		} else if (description === 'old') {
-			VolNgo.find({$and:[{suburb: suburb_name}, {old: 'y'}]}, (err, volNGOs) => {
+			VolNgo.find({$and:[{suburb: location}, {old: 'y'}]}, {_id:0}, (err, volNGOs) => {
 				if (err) {
 					console.log(err);
 				} else {
@@ -121,7 +118,7 @@ app.get('/volunteers', (req,res) => {
 				}
 			});
 		} else if (description === 'family') {
-			VolNgo.find({$and:[{suburb: suburb_name}, {family: 'y'}]}, (err, volNGOs) => {
+			VolNgo.find({$and:[{suburb: location}, {family: 'y'}]}, {_id:0}, (err, volNGOs) => {
 				if (err) {
 					console.log(err);
 				} else {
@@ -129,7 +126,7 @@ app.get('/volunteers', (req,res) => {
 				}
 			});
 		} else {
-			VolNgo.find({suburb: suburb_name}, (err, volNGOs) => {
+			VolNgo.find({suburb: location}, {_id:0}, (err, volNGOs) => {
 				if (err) {
 					console.log(err);
 				} else {
@@ -138,7 +135,6 @@ app.get('/volunteers', (req,res) => {
 			});
 		}
 	} else {
-		// 第一次访问volunteer page的时候给一个数据库中没有的suburb然后什么也不显示
 		VolNgo.find({suburb: "shanghai"}, (err, volNGOs) => {
 			if (err) {
 				console.log(err);
@@ -153,14 +149,12 @@ app.get('/volunteers', (req,res) => {
 app.get('/donations', (req,res) => {
 	var location = req.query.location;
 	if (typeof location !== "undefined") {
-		DonationNgo.find({}, {_id:0}, function(err, allngos) {
-			DonationNgo.find({Suburb: location}, {_id:0}, function(err, donationNGOs) {
-				if (err) {
-					console.log(err);
-				} else {
-					res.render("donation", {donationNGO: donationNGOs});
-				}
-			});
+		DonationNgo.find({Suburb: location}, {_id:0}, function(err, donationNGOs) {
+			if (err) {
+				console.log(err);
+			} else {
+				res.render("donation", {donationNGO: donationNGOs});
+			}
 		});
 	} else {
 		DonationNgo.find({suburb: "shanghai"}, function(err, donationNGOs) {
@@ -171,6 +165,14 @@ app.get('/donations', (req,res) => {
 			}
 		});
 	}
+});
+
+app.get('/donateinfo', (req,res) => {
+	res.render("donate_info");
+});
+
+app.get('/volinfo', (req,res) => {
+	res.render("vol_info");
 });
 
 

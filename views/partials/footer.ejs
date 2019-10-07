@@ -31,4 +31,34 @@
 </html>
 <script>
 	$('.auto-save').savy('load');
+	
+	$("#donate-switch").on('click', () => {
+		// If donate infographic page has not been visited
+		if(!sessionStorage.getItem('donatevisited')){
+			$('#donate-switch').attr('href', "/donateinfo");
+			sessionStorage.setItem('donatevisited', 'true');
+			return;
+		}
+		if(sessionStorage.getItem('donatevisited')){
+			$('#donate-switch').attr('href', "/donations");
+			return;
+		}
+	});
+	
+	$("#vol-switch").on('click', () => {
+		// If volunteer infographic page has not been visited
+		if(!sessionStorage.getItem('volvisited')){
+			$('#vol-switch').attr('href', "/volinfo");
+			sessionStorage.setItem('volvisited', 'true');
+			return;
+		}
+		if(sessionStorage.getItem('volvisited')){
+			$('#vol-switch').attr('href', "/volunteers");
+			return;
+		}
+	});
+	
+	function clean(){
+		localStorage.clear();
+	}
 </script>

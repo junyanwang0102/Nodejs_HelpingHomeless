@@ -226,17 +226,20 @@
 			<div class="row text-center" style="display:flex; flex-wrap:wrap;">
 					<div class="col-xs-0 col-md-3" style="overflow-y: auto; height:800px;">
 						<div id="accordion" class="thumbnail">
-							<% volNGO.forEach(ngo => { %>
+							<% for(var i = 0; i < volNGO.length; i++) { %>
+								<% var ngo = volNGO[i]; %>
 								<div class="card">
 									<div class="card-header" id="headingOne">
 										<h5 class="mb-0" id="span1">
-											<button class="btn btn-link collapsed" data-toggle="collapse" data-target="#collapse<%= ngo._id %>" aria-expanded="false" aria-controls="collapse<%= ngo._id %>" style="text-decoration:none;" >
-												<span style="color:black;"><%= ngo.name %></span>
-											</button>
+											<a href="javascript:google.maps.event.trigger(gmarkers['tigger<%-i%>'],'click');" style="color:black;">
+												<button class="btn btn-link collapsed" data-toggle="collapse" data-target="#collapse<%-i%>" aria-expanded="false" aria-controls="collapse<%-i%>" style="text-decoration:none; color:black;">
+													<span style="color:black;"><%= ngo.name %></span>
+												</button>
+											</a>
 										</h5>
 									</div>
 
-									<div id="collapse<%= ngo._id %>" class="collapse" aria-labelledby="headingOne" data-parent="#accordion">
+									<div id="collapse<%-i%>" class="collapse" aria-labelledby="headingOne" data-parent="#accordion">
 										<div class="card-body">
 											<ul class="text-left">
 												<li><strong>Address: </strong><br/><%= ngo.address %></li>
@@ -246,7 +249,7 @@
 										</div>
 									</div>
 								</div>
-							<% }) %>
+							<% } %>
 						</div>
 					</div>
 					<!-- 生成右边的 map -->
@@ -260,8 +263,9 @@
 
 	<script>
 		function initMap() {
-			var infowindow = new google.maps.InfoWindow();
-			<% volNGO.forEach( ngo => { %>
+			<% if(volNGO.length !== 0){ %>
+				var infowindow = new google.maps.InfoWindow();
+				<% var ngo = volNGO[0]; %>
 				var latitude = <%= ngo.latitude %>;
 				var longitude = <%= ngo.longitude %>;
 				var center = {
@@ -273,45 +277,38 @@
 					center: center,
 					gestureHandling: 'cooperative'
 				});
-			<% }) %>
 			
-			<% function placeMarker(ngo) { %>
-				<% var lat = ngo.latitude; %>
-				<% var lng = ngo.longitude; %>
-				<% var name = ngo.name; %>
-				<% var address = ngo.address; %>
-				<% var volNum = ngo.num_volunteers; %>
-				var latLng = new google.maps.LatLng(<%=lat%>, <%=lng%>);
-				var marker = new google.maps.Marker({ 
-					position: latLng,
-					map: map,
-					animation: google.maps.Animation.DROP
-				});
-				marker.addListener('click', function() {
-					//marker.getPosition(this.position);
-					infowindow.close();
-					infowindow.setContent(`<div style="padding: 10px;"> <p class="text-left" style="color:red;"><strong><%=name%></strong></p><br /><p class="text-left"><%=address%></p><br /><p class="text-left">Number of volunteers:      <strong><%=volNum%></strong></p></div>`);
-					infowindow.open(map, marker);
-					infowindow.setPosition(this.position);
-					//map.setZoom(15);
-					// if (marker.getAnimation() !== null) {
-					// 	marker.setAnimation(null);
-					// } else {
-					// 	marker.setAnimation(google.maps.Animation.BOUNCE);
-					// }
-			  	});
-			<% } %>
-			
-			
-			<% for (var i = 0; i < volNGO.length; i++) { %>
-				<% placeMarker(volNGO[i]); %>
-			<% } %>
-			
-		}
-		google.maps.event.addDomListener(window, 'load', initMap);
-	</script>
+				gmarkers = [];
+				var ngos = [<%-volNGO%>];
 
+
+				function placeMarker(ngo) { 
+					var lat = ngo.latitude;
+					var lng = ngo.longitude;
+					var name = ngo.name;
+					var address = ngo.address;
+					var numofvol = ngo.num_volunteers;
+					
+					var marker = new google.maps.Marker({
+						position: new google.maps.LatLng(lat, lng),
+						map: map,
+						animation: google.maps.Animation.DROP
+					});
+
+					marker.addListener('click', function() {
+						infowindow.close();
+						infowindow.setContent(`<div style="padding: 10px;"> <p class="text-left" style="color:red;"><strong>${name}</strong></p><br /><p class="text-left"><strong>${address}</strong></p><br /><p class="text-left">Number of Volunteers: <strong>${numofvol}</strong></p><br /></div>`);
+						infowindow.open(map, marker);
+						infowindow.setPosition(this.position);
+					});
+					return marker;
+				}
+			
+				ngos.forEach((ngo,i) => {
+					gmarkers['tigger'+i] = placeMarker(ngo);
+				});
+			<% } %>
+		}
+	</script>
+	<script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDEmNNZ8gW73CShJzZLosV-kb3_JYtFua0&callback=initMap"></script>
 <% include partials/footer %>
-<script>
-	$('.auto-save').savy('load');
-</script>
