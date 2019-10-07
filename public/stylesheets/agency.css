@@ -157,9 +157,6 @@ p {
 	line-height: 1.75;
 }
 
-a {
-	color: #fed136;
-}
 
 a:hover {
 	color: #fec503;
@@ -560,7 +557,7 @@ header.masthead .intro-text .intro-heading {
 }
 
 .portfolio-modal .modal-dialog {
-	margin: 1rem;
+	margin: 6rem;
 	max-width: 100vw;
 }
 

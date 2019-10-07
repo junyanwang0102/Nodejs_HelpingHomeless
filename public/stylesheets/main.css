@@ -1272,7 +1272,7 @@ body {
 
 #modal-video-01 {
 	background-color: rgba(0, 0, 0, 0.8);
-	z-index: 1250;
+	z-index: 500;
 }
 
 #modal-video-01 .modal-dialog {
@@ -1293,9 +1293,10 @@ body {
 
 .wrap-video-mo-01 {
 	width: 854px;
-	height: auto;
+	height: 500px;
 	position: relative;
 	margin: 15px;
+	z-index: 1000;
 }
 
 .video-mo-01 {
