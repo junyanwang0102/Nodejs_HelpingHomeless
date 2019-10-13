@@ -31,7 +31,7 @@ ul, li {
 .side-menu a {
   display: block;
   position: relative;
-  color: gold;
+  color: red;
   text-decoration: none;
   white-space: nowrap;
   text-align: right;
@@ -43,7 +43,7 @@ ul, li {
   width: 16px;
   height: 16px;
   border-radius: 50%;
-  border: 2px solid gold;
+  border: 2px solid red;
   -webkit-transition: 0.2s;
           transition: 0.2s;
 }
@@ -63,7 +63,7 @@ ul, li {
 }
 
 .side-menu .active a:after {
-  background: gold;
+  background: red;
 }
 
 .side-menu .active span {
