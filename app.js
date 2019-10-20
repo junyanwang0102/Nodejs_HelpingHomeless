@@ -73,10 +73,10 @@ var UserVolunteer = mongoose.model("UserVolunteer", uservolunteerSchema);
 var VolNgo = mongoose.model("VolNgo", volNgoSchema);
 var DonationNgo = mongoose.model("donationNgo", donationNgoSchema);
 
-// 插数据代码
+// insert data into DB
 // DonationNgo.create();
 
-// 删数据代码
+// delete data
 // DonationNgo.remove({}, function(err) {});
 
 // ************** Start Restful Routing ****************
@@ -189,7 +189,6 @@ app.get('/volinfo', (req,res) => {
 
 
 
-// mongoDB 排序组合！
 // var mySort = {_id:-1};
 
 // local DB
@@ -212,8 +211,7 @@ app.get('/volinfo', (req,res) => {
 // 	longitude: Number
 // });
 
-// 第一步，用户在volunteer page 填写完subrub和type的时候，处理表单的信息
-// app.post("/volunteers", function(req, res){
+
 //   var description = req.body.description;
 //   geocoder.geocode(req.body.location, function(err, data) {
 //     if (err || !data.length) {
@@ -226,7 +224,6 @@ app.get('/volinfo', (req,res) => {
 //     var newUserVolunteer = {description: description, location: location, lat: lat, lng: lng};
 
 	  
-// 	// 接收表单信息后创建一个新对象并且存到数据库里
 //     UserVolunteer.create(newUserVolunteer, function(err, newlyCreated){
 //         if(err){
 //             console.log(err);
